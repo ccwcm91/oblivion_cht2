@@ -1,0 +1,181 @@
+<!--
+	CONTAINER CONFIG
+	CONFIG VERSION : 12 Slot, Default fonts
+	
+	CONFIG FOR BTMOD BY : Beider & Tikigod
+	CONFIG BY : Beider
+	
+	If you are make changes and want to test them without restarting the game then
+	open your console by hitting the tilde key (key left of the 1 key). Then type,
+		
+		reload containermenu
+		
+	Then hit the Tilde key again to exit the console.
+
+-->
+<rect name="Imp_UI_Settings">
+	
+	<!-- REMEMBER IF YOU CHANGE THIS YOU HAVE TO UPDATE container_template.xml -->
+	<_containerlistnum> 12 </_containerlistnum>				<!-- DEFAULT : 12 -->
+	<_containerlistheight> 40 </_containerlistheight>			<!-- DEFAULT : 40 -->
+		<!-- This has to be the same as above only negative -->
+	<_containerlistheightneg> -40 </_containerlistheightneg>		<!-- DEFAULT : -40 -->
+	
+	<!-- CONTAINER LIST HEADERS
+	
+		- Adjust the headers for the container
+		- Also adjust all the icons in the header
+	 -->
+	
+	<_conlistheaderfont> 3 </_conlistheaderfont> 				<!-- DEFAULT : 3 -->
+	<_conlistheaderred> 51 </_conlistheaderred>				<!-- DEFAULT : 51 -->
+	<_conlistheadergreen> 79 </_conlistheadergreen>				<!-- DEFAULT : 79 -->
+	<_conlistheaderblue> 142 </_conlistheaderblue>				<!-- DEFAULT : 142 -->
+	<_conlistheaderalpha> 255 </_conlistheaderalpha>			<!-- DEFAULT : 255 -->
+	<_conlistheadericonalpha> 255 </_conlistheadericonalpha>		<!-- DEFAULT : 255 -->
+	<_containerlistheadborderoffsety> 5 </_containerlistheadborderoffsety>		<!-- DEFAULT : 5 -->
+	<_containerlistheadoffsety> 7 </_containerlistheadoffsety>		<!-- DEFAULT : 7 -->
+	
+	
+	<!-- EXTRA DATA
+	
+		- Adjust the data at the bottom of the list, encumberance, money.
+	 -->
+	
+	<_conextrafont> 1 </_conextrafont>			 	<!-- DEFAULT : 1 -->
+	<_conextrared> 117 </_conextrared>				<!-- DEFAULT : 117 -->
+	<_conextragreen> 59 </_conextragreen>				<!-- DEFAULT : 59 -->
+	<_conextrablue> 33 </_conextrablue>				<!-- DEFAULT : 33 -->
+	<_conextraalpha> 255 </_conextraalpha>				<!-- DEFAULT : 255 -->
+	
+	
+	<!-- TEXTURES
+	
+		- This is to allow skinning of the menu screens	
+	-->
+
+	<_sharedmainback1> Menus\Shared\shared_main_background_1.dds </_sharedmainback1>
+	<_sharedmainback2> Menus\Shared\shared_main_background_2.dds </_sharedmainback2>
+	
+	<_sharedtab1> Menus\Shared\shared_01_tab.dds </_sharedtab1>
+	<_sharedtab2> Menus\Shared\shared_02_tab.dds </_sharedtab2>
+	<_sharedtab3> Menus\Shared\shared_03_tab.dds </_sharedtab3>
+	<_sharedtab4> Menus\Shared\shared_04_tab.dds </_sharedtab4>
+	<_sharedtab5> Menus\Shared\shared_05_tab.dds </_sharedtab5>
+	
+	<_shareddecorblueleft> Menus\Shared\shared_decor_blue_left.dds </_shareddecorblueleft>
+	<_shareddecorblueright> Menus\Shared\shared_decor_blue_right.dds </_shareddecorblueright>
+	
+	<_allsmallicons> Menus\Shared\all_small_icons.dds </_allsmallicons>
+	
+	<_invbordertop> Menus\Inventory\inv_border_top.dds </_invbordertop>
+	<_invbordermiddle> Menus\Inventory\inv_border_middle.dds </_invbordermiddle>
+	<_invborderbottom> Menus\Inventory\inv_border_bottom.dds </_invborderbottom>
+	
+	<_invicontabalchemy> Menus\Inventory\inv_icon_tab_alchemy.dds </_invicontabalchemy>
+	<_invicontabapparel> Menus\Inventory\inv_icon_tab_apparel.dds </_invicontabapparel>
+	<_invicontabweapons> Menus\Inventory\inv_icon_tab_weapons.dds </_invicontabweapons>
+	<_invicontabmisc> Menus\Inventory\inv_icon_tab_misc.dds </_invicontabmisc>
+	<_invicontaball> Menus\Inventory\inv_icon_tab_all.dds </_invicontaball>
+	
+	<_iconsmallarrow> Menus\Icons\icon_small_arrow.dds </_iconsmallarrow>
+	<_iconsmallweight> Menus\Icons\icon_small_weight.dds </_iconsmallweight>
+	
+	<_iconpathname> icon/pathname.dds </_iconpathname>
+	
+	<_contboxbackground1> Menus\Container\cont_box_background_1.dds </_contboxbackground1>
+	<_contboxbackground2> Menus\Container\cont_box_background_2.dds </_contboxbackground2>
+	<_contselectframe> Menus\Container\cont_select_frame.dds </_contselectframe>
+	<_conticoninvoff> Menus\Container\cont_icon_inv_off.dds </_conticoninvoff>
+	<_conticoninvon> Menus\Container\cont_icon_inv_on.dds </_conticoninvon>
+	
+	<_conticoncontoff> Menus\Container\cont_icon_cont_off.dds </_conticoncontoff>
+	<_conticonconton> Menus\Container\cont_icon_cont_on.dds </_conticonconton>
+	
+	<_contselectframemarker> Menus\Container\cont_select_frame_marker.dds </_contselectframemarker>
+	
+	<_hudxboxlt> Menus\HUD\hud_xbox_lt.dds </_hudxboxlt>
+	<_hudxboxrt> Menus\HUD\hud_xbox_rt.dds </_hudxboxrt>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-------------------------------------------------------------------------------------------------
+					All options below this point are moved to container_template.xml
+					The reason for this is to solve the loot lagg that appeared when opening
+					chests and such if you had a lot of items in your inventory.
+	-------------------------------------------------------------------------------------------------->
+	
+	
+	<!-- CONTAINER TEXT
+	
+		- Changes the font of the item names and stat values
+		- Changes color of the text (RGB values)
+		- Change the opacity of the text
+	
+	
+	WE HAD TO REMOVE THIS SECTION TO GET RID OF LOOT LAG
+	
+	<_containerfont> 3 </_containerfont> 		<!-- DEFAULT : 3
+	<_containerred> 117 </_containerred> 		<!-- DEFAULT : 117
+	<_containergreen> 59 </_containergreen>		<!-- DEFAULT : 59
+	<_containerblue> 33 </_containerblue>		<!-- DEFAULT : 33
+	<_containeralpha> 255 </_containeralpha> 	<!-- DEFAULT : 255 -->
+	
+	<!-- ITEM COUNT ADDITIONAL OPTIONS
+	
+		- Options to adjust the item count font and positioning
+	 
+	
+	WE HAD TO REMOVE THIS SECTION TO GET RID OF LOOT LAG
+	
+	<_containercountfont> 3 </_containercountfont> 			<!-- DEFAULT : 3
+	<_containercountx> 65 </_containercountx>			<!-- DEFAULT : 65
+	<_containercounty> 13 </_containercounty>			<!-- DEFAULT : 13 -->
+	
+	<!-- CONTAINER LIST ICONS
+	
+		- Adjusts the icon for each item
+	
+	WE HAD TO REMOVE THIS SECTION TO GET RID OF LOOT LAG
+	
+	<_containericonwidth> 32 </_containericonwidth>		<!-- DEFAULT : 32
+	<_containericonheight> 32 </_containericonheight>	<!-- DEFAULT : 32
+	<_containericonzoom>50</_containericonzoom>		<!-- DEFAULT : 50 <!-- 50 = 50%, 100 = 100% -->
+	
+	<!-- CONTAINER LIST
+	
+		- Adjusts the number of items shown in the list
+		- Adjust the height spacing between items in the list
+		
+		NOTE:
+		Make sure _containerlistheightneg is the same as _containerlistheight only negative,
+		else you will get scrolling bugs.
+	 -->
+	 
+	
+	<!-- CONTAINER MARKER
+	
+		- Changes the blue line behind equipped items
+		- Should be changed if you modify the amount of items in the list
+	 
+	WE HAD TO REMOVE THIS SECTION TO GET RID OF LOOT LAG
+	
+	<_conmarkeralpha> 160 </_conmarkeralpha>		<!-- DEFAULT : 160
+	<_conmarkerwidth> 640 </_conmarkerwidth>		<!-- DEFAULT : 640
+	<_conmarkerheight> 35 </_conmarkerheight>		<!-- DEFAULT : 35
+	<_conmarkercropy> 5 </_conmarkercropy>			<!-- DEFAULT : 5
+	<_conmarkerx> 4 </_conmarkerx>				<!-- DEFAULT : 4
+	<_conmarkery> 3 </_conmarkery>				<!-- DEFAULT : 3 -->
+
+</rect>

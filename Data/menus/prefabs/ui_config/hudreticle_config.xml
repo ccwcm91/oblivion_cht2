@@ -1,0 +1,43 @@
+<!--
+	HUD CONFIG
+	CONFIG VERSION : Fade On, Markers On, Borders Off, Zoom 0.75
+	
+	CONFIG FOR BTMOD BY : Beider & Tikigod
+	CONFIG BY : Beider
+	
+	If you are make changes and want to test them without restarting the game then
+	open your console by hitting the tilde key (key left of the 1 key). Then type,
+		
+		reload hudreticle
+		
+	Then hit the Tilde key again to exit the console.
+
+-->
+
+<rect name="Imp_UI_Settings">
+
+<!--------------------------------------------------------------------------------------
+									SNEAK ICON
+----------------------------------------------------------------------------------------
+	
+		- This allow you to move the sneak icon
+		
+		X/Y Is adjusted relative to the middle of the screen.
+	-->
+	
+	<!-- X / Y -->
+	<_sneakx> -30 </_sneakx>	<!-- DEFAULT : -30 -->
+	<_sneaky> -25 </_sneaky>	<!-- DEFAULT : -25 -->
+	
+	<!-- Red / Green / Blue -->
+	<_sneakr> 255 </_sneakr>	<!-- DEFAULT : 255 -->
+	<_sneakg> 255 </_sneakg>	<!-- DEFAULT : 255 -->
+	<_sneakb> 255 </_sneakb>	<!-- DEFAULT : 255 -->
+	
+	<!-- Zoom / Width / Height -->
+	<_sneakz> 100 </_sneakz>	<!-- DEFAULT : 100 -->
+	<_sneakw> 64 </_sneakw>		<!-- DEFAULT : 64 -->
+	<_sneakh> 64 </_sneakh>		<!-- DEFAULT : 64 -->
+	
+	
+</rect>

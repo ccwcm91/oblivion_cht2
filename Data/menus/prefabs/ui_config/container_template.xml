@@ -1,0 +1,391 @@
+<!--
+	CONTAINER TEMPLATE
+	CONFIG VERSION : Default
+	
+	CONFIG FOR BTMOD BY : Beider & Tikigod
+	CONFIG BY : Beider
+	
+	If you are make changes and want to test them without restarting the game then
+	open your console by hitting the tilde key (key left of the 1 key). Then type,
+		
+		reload containermenu
+		
+	Then hit the Tilde key again to exit the console.
+
+
+BEIDER COMMENT
+
+	This file allows you to modify how items appear in the loot list,
+	we had to move this into it's own file and couldn't use it in the config.
+	
+	As some might remember in version 2.1 the loot window lagged like hell
+	if you had a lot of items in the inventory. This was due to making calls
+	to the config from this template.
+-->
+
+<template name="cont_item_template">
+	<rect name="cont_item">
+		<visible> <copy src="me()" trait="user8"/> </visible>
+		<listclip>
+			<copy src="me()" trait="listindex"/>
+			<gte>
+				<copy src="cont_scroll_bar" trait="user7"/>
+				<add src="cont_scroll_bar" trait="user8"/>
+			</gte>
+			<or>
+				<copy src="me()" trait="listindex"/>
+				<lt src="cont_scroll_bar" trait="user7"/>
+			</or>
+		</listclip>
+		<target> &true; </target>
+		<repeatvertical> &true; </repeatvertical>
+		<clips> &true; </clips>
+		<focusinset> 9 </focusinset>
+		<x> 0 </x>
+		<y>
+			<copy src="me()" trait="listindex"/>
+			<mult src="me()" trait="height"/>
+		</y>
+		<depth> 1 </depth>
+		<locus> &true; </locus>
+		<alpha> 0 </alpha>
+		<width> 650 </width>
+		<!--
+			HEIGHT
+			
+			Should be changed if you change the number of items in the inventory list.
+		
+		-->
+		<height> 40 </height>
+		<listindex> 0 </listindex>			<!-- list position index -->
+		<user1> Item Name </user1>			<!-- item name -->
+		<user2> First Value </user2>		<!-- 1st column value -->
+		<user3> Second Value </user3>		<!-- 2nd column value -->
+		<user4> Third Value </user4>		<!-- 3rd column value -->
+		<user5> Fourth Value </user5>		<!-- 4th column value -->
+		<user6> icon/pathname.dds </user6>	<!-- icon pathname -->
+		<user7> 1M </user7>					<!-- count -->
+		<user8> &true; </user8>				<!-- visible -->
+		<user9> type </user9>				<!-- type (weapon,armor,alchemy,misc) -->
+		<user10> &false; </user10>			<!-- is equiped -->
+		<user11> 0 </user11>				<!-- inventory system index -->
+		<user12> 0 </user12>				<!-- status combination -->
+		<user13></user13>					<!-- status icon filename -->
+		<user14> &true; </user14>				<!-- true if is container item, false if inventory item -->
+		
+		<!-- This element is a list item. If it gets an input command it doesn't know how to handle
+			it will defer the command to its parent. The xlist trait set to true triggers this. -->
+		<xdefault> &false; </xdefault>
+		<xlist> &xitem; </xlist>
+		<xup> &prev; </xup>
+		<xdown> &next; </xdown>
+		<xscroll>
+			<copy src="me()" trait="listindex" />
+			<sub>
+				<copy src="cont_scroll_bar" trait="user8"/>
+				<div> 2 </div>
+				<ceil> 0 </ceil>
+			</sub>
+			<add> 1 </add>
+		</xscroll>
+		
+		<!--
+			BACKGROUND MARKER
+			
+			This is the background marker, edit it to change the blue line behind equipped items.
+		
+		-->
+		<image name="cont_equiped_marker">
+			<visible> <copy src="parent()" trait="user10" /> </visible>
+			<clips> &true; </clips>
+			<depth> 2 </depth>
+			<filename> Menus\Inventory\inv_equiped_marker_1.dds </filename>
+			<alpha> 160 </alpha>
+			<width> 640 </width>
+			<height> 35 </height>
+			<cropy> 5 </cropy>
+			<x> 4 </x>
+			<y> 3 </y>
+		</image>
+		
+		<!--
+			CONTAINER ICON
+			
+			This is the small item icon to the left.
+			
+			You need to change both cont_item_icon and cont_item_over_icon
+		
+		-->
+		<image name="cont_item_icon">
+			<visible> <sub src="parent()" trait="user10" /> <eq> &false; </eq> </visible>
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<filename>
+				<copy src="parent()" trait="user0" />
+			</filename>
+			<zoom> 50 </zoom>
+			<width> 32 </width>
+			<height> 32 </height>
+			<x> 5 </x>
+			<y> 7 </y>
+		</image>
+		
+		<image name="cont_item_over_icon">
+			<visible> <sub src="parent()" trait="user10" /> </visible>
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<filename>
+				<copy src="parent()" trait="user6" />
+			</filename>
+			<zoom> 50 </zoom>
+			<width> 32 </width>
+			<height> 32 </height>
+			<x> 5 </x>
+			<y> 7 </y>
+		</image>
+		
+		<!--
+			ITEM COUNT
+			
+			The item count text.
+		
+		-->
+		<text name="cont_item_count">
+			<clips> &true; </clips>
+			<depth> 5 </depth>
+			<justify> &right; </justify>
+			<font> 3 </font>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<wrapwidth> 55 </wrapwidth>
+			<wraplines> 1 </wraplines>
+			<string>
+				<copy src="parent()" trait="user7" />
+			</string>
+			<x>
+				65
+			</x>
+			<y>
+				13
+			</y>
+		</text>
+
+		<!--
+			STATUS ICONS
+			
+			This is the small icon that show if an item is magical, stolen, poisoned etc...
+		
+		-->
+		<image name="inv_item_status">
+<visible>
+	<copy src="parent()" trait="user12"/>
+	<gt>0</gt>
+</visible>
+<zoom>50</zoom>
+<filename> <copy src="parent()" trait="user13"/> </filename>
+<depth>
+	<copy src="cont_item_icon" trait="depth"/>
+	<add>1</add>
+</depth>
+<x>
+	<copy src="inv_item_icon" trait="x"/>
+</x>
+<y>
+	<copy src="cont_item_icon" trait="y"/>
+	<copy>25</copy>		<onlyif src="me()" trait="_handonly"/>
+	<add>
+		<copy>27</copy>	<onlyifnot src="me()" trait="_handonly"/>
+	</add>
+</y>
+<height>
+	<copy>16</copy>		<onlyif src="me()" trait="_handonly"/>
+	<add>
+		<copy>32</copy>	<onlyifnot src="me()" trait="_handonly"/>
+	</add>
+</height>
+<width>
+	<copy>32</copy>
+	<sub>
+		<copy>16</copy>
+		<onlyif>
+			<!-- If any of these conditions is true, we are using an original icon,
+			     rather than a "combo" dds. -->
+			<!-- "Combo" dds's are 32x64, original icons are 32x32 -->
+			<copy src="me()" trait="_handonly"/>
+			<or> <copy src="parent()" trait="user12"/> <eq>2</eq> </or>
+			<or> <copy src="parent()" trait="user12"/> <eq>4</eq> </or>
+			<or> <copy src="parent()" trait="user12"/> <eq>8</eq> </or>
+		</onlyif>
+	 </sub>
+</width>
+
+<clips> &true; </clips>
+<red>
+	<copy>208</copy>	<onlyif src="me()" trait="_handonly"/>
+	<add>
+		<copy>255</copy><onlyifnot src="me()" trait="_handonly"/>
+	</add>
+</red>
+<green>
+	<copy>0</copy>		<onlyif src="me()" trait="_handonly"/>
+	<add>
+		<copy>255</copy><onlyifnot src="me()" trait="_handonly"/>
+	</add>
+</green>
+<blue>
+	<copy>0</copy>		<onlyif src="me()" trait="_handonly"/>
+	<add>
+		<copy>255</copy><onlyifnot src="me()" trait="_handonly"/>
+	</add>
+</blue>
+
+<_handonly>
+	<copy src="parent()" trait="user12"/>
+	<eq> 1 </eq>
+</_handonly>
+</image>
+		
+		<!--
+			ITEM NAME
+			
+			Header says it all
+		
+		-->
+		<text name="cont_item_name">
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<justify> &left; </justify>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<font> 3 </font>
+			<wrapwidth> 320 </wrapwidth>
+			<wraplines> 1 </wraplines>
+			<string>
+				<copy src="parent()" trait="user1" />
+			</string>
+			<x> 80 </x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add>-2</add>
+			</y>
+		</text>
+		
+		<!--
+			ITEM COST
+			
+			Header says it all
+		
+		-->
+		<text name="cont_item_cost">
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<justify> &center; </justify>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<font> 3 </font>
+			<wrapwidth> 90 </wrapwidth>
+			<string>
+				<copy src="parent()" trait="user2" />
+			</string>
+			<x> 418 </x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add>-2</add>
+			</y>
+		</text>
+		
+		<!--
+			ITEM WEIGHT
+			
+			Header says it all
+		
+		-->
+		<text name="cont_item_weight">
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<justify> &center; </justify>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<font> 3 </font>
+			<wrapwidth> 64 </wrapwidth>
+			<string>
+				<copy src="parent()" trait="user3" />
+			</string>
+			<x> 496 </x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add>-2</add>
+			</y>
+		</text>
+		
+		<!--
+			ITEM DAMAGE
+			
+			Header says it all
+		
+		-->
+		<text name="cont_item_damage">
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<justify> &center; </justify>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<font> 3 </font>
+			<wrapwidth> 70 </wrapwidth>
+			<string>
+				<copy src="parent()" trait="user4" />
+			</string>
+			<x> 556 </x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add>-2</add>
+			</y>
+		</text>
+		
+		<!--
+			ITEM HEALTH (DURABILITY)
+			
+			Header says it all
+		
+		-->
+		<text name="cont_item_health">
+			<clips> &true; </clips>
+			<depth> 3 </depth>
+			<justify> &center; </justify>
+			<red> 117 </red>
+			<green> 59 </green>
+			<blue> 33  </blue>
+			<alpha> 255 </alpha>
+			<font> 3 </font>
+			<wrapwidth> 50 </wrapwidth>
+			<string>
+				<copy src="parent()" trait="user5" />
+			</string>
+			<x> 616 </x>
+			<y>
+				<copy src="parent()" trait="height" />
+				<sub src="me()" trait="height" />
+				<div> 2 </div>
+				<add>-2</add>
+			</y>
+		</text>
+	</rect>
+</template>

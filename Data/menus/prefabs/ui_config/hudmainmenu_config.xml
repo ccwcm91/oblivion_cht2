@@ -1,0 +1,988 @@
+<!--
+	HUD MAIN MENU CONFIG
+	CONFIG VERSION : Default
+	
+	CONFIG FOR BTMOD BY : Beider & Tikigod
+	CONFIG BY : Beider
+	
+	If you are make changes and want to test them without restarting the game then
+	open your console by hitting the tilde key (key left of the 1 key). Then type,
+		
+		reload hudmainmenu
+		
+	Then hit the Tilde key again to exit the console.
+	
+	
+	BEIDER COMMENT
+		Half way through i switch into another tag format with tiny tags,
+		reason for this was because of some problems i ran into and some things
+		I tested. I didn't care to change it back afterwards so just live with it.
+		
+		You can usually read from the last letter what setting it affects.
+
+
+
+Section List :
+
+	Status bars
+	
+		This section you can move all three status bars at once.
+	
+	Menu Replacements
+	
+		This is something i added so you can still have images in your menu even if
+		you move your original icons away. Just set this on for the icons you moved away.
+		
+	Hp Bar
+	
+		Settings for the HP bar.
+		
+	Hp Bar Text
+	
+		Settings for the HP text.
+		
+	Magica Bar
+	
+		Settings for the Magica bar.
+		
+	Magica Bar Text
+	
+		Settings for the Magica text.
+		
+	Fatigue Bar
+	
+		Settings for Fatigue bar.
+		
+	Fatigue Bar Text
+	
+		Settings for Fatigue text.
+		
+	Weapon Icon
+	
+		The active weapon icon settings.
+		
+	Magic Icon
+	
+		Active spell settings.
+		
+	Compass
+	
+		Here you can move the compass
+		
+	Levelup Icon
+	
+		Levelup icon settings.
+		
+	Effects Icons
+	
+		The icons in top right corner can be moved here including the text.
+		(Active effects)
+		
+	Onscreen Warnings For Low HP
+	
+		Warning when you run low on HP.
+		
+	Onscreen Warnings For Low MA
+	
+		Warning when you run low on MA
+		
+	Onscreen Warnings For Low FA
+	
+		Warning when you run low on FA
+		
+	Durability Bar
+	
+		Durability bar settings.
+		
+	Durability Text
+	
+		Durability text settings.
+-->
+
+<rect name="Imp_UI_Settings">
+
+<!--------------------------------------------------------------------------------------
+									STATUS BARS
+----------------------------------------------------------------------------------------
+	
+		- This allow you to move all the status bars at once.
+	 -->
+	
+	<!-- X / Y -->
+	<_statusallx> 0 </_statusallx>	<!-- DEFAULT : 0 -->
+	<_statusally> 12 </_statusally>	<!-- DEFAULT : 12 -->
+	
+	
+	
+<!--------------------------------------------------------------------------------------
+									MENU REPLACEMENTS
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		This is something i added so you can still have images in your menu even if
+		you move your original icons away. Just set this on for the icons you moved away.
+	-->	
+	
+	<_magiciconr> &false; </_magiciconr> <!-- DEFAULT : &false; -->
+	<_wepiconr> &false; </_wepiconr> <!-- DEFAULT : &false; -->
+	<_barsiconr> &false; </_barsiconr> <!-- DEFAULT : &false; -->
+	<_compiconr> &false; </_compiconr> <!-- DEFAULT : &false; -->
+	
+	
+<!--------------------------------------------------------------------------------------
+										HP BAR
+----------------------------------------------------------------------------------------
+	
+		- This allows you to adjust the bar
+	 -->
+	 
+	 <!-- The bar's scale -->
+	 <_hpbarzoom> 100 </_hpbarzoom> <!-- DEFAULT : 100 -->
+	 <_hpbarmul> 163 </_hpbarmul> <!-- DEFAULT : 163 -->
+	 <!-- Height of background, used to avoid line errors Must be scaled with bar scale -->
+	 <_hpbarh> 16 </_hpbarh> <!-- DEFAULT : 16 -->
+	 
+	 <!-- The bar's x / y position. Moves in relation to all status bars (set above) -->
+	 <_hpbarx> 0 </_hpbarx> <!-- DEFAULT : 0 -->
+	 <_hpbary> 0 </_hpbary> <!-- DEFAULT : 0 -->
+	 
+	 <!-- This is the red texture of the bar -->
+	 <_hpbarfullheight> 11 </_hpbarfullheight> <!-- DEFAULT : 11 -->
+	 <_hpbarfully> 2 </_hpbarfully> <!-- DEFAULT : 2 -->
+	 <_hpbarfullx> 11 </_hpbarfullx> <!-- DEFAULT : 11 -->
+	 
+	 <!-- The bar's edge X / Y, might have to be adjusted if you scale it. -->
+	 <_hpbaredgex> 0 </_hpbaredgex> <!-- DEFAULT : 0 -->
+	 <_hpbaredgey> 0 </_hpbaredgey> <!-- DEFAULT : 0 -->
+	 
+	 <!-- This is the bar itself -->
+	 <_hpbaralpha> 255 </_hpbaralpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- This is the marker that shows where on your bar you are -->
+	 <_hpbaredgealpha> 255 </_hpbaredgealpha> <!-- DEFAULT : 255 -->
+
+	 <!-- This is background behind your bar (visible when you lose life) -->
+	 <_hpbaremptyalpha> 255 </_hpbaremptyalpha> <!-- DEFAULT : 255 -->
+	 
+	 
+<!--------------------------------------------------------------------------------------
+									HP BAR TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		NOTE:
+			The shadows colors are linked
+			The text colors are linked
+			All fonts are linked
+	 -->
+	 
+	 <!-- FRONT TEXT-->
+	 <_hptextfvisible> &false; </_hptextfvisible> <!-- DEFAULT : &true; -->
+	 <!-- FRONT TEXT SHADOW -->
+	 <_hptextfsvisible> &false; </_hptextfsvisible> <!-- DEFAULT : &true; -->
+	 <!-- TEXT -->
+	 <_hptextvisible> &false; </_hptextvisible> <!-- DEFAULT : &true; -->
+	 <!-- SHADOW -->
+	 <_hptextsvisible> &false; </_hptextsvisible> <!-- DEFAULT : &true; -->
+	 <!-- % TEXT -->
+	 <_hppectvisible> &false; </_hppectvisible> <!-- DEFAULT : &true; -->
+	 <!-- % SHADOW -->
+	 <_hppectsvisible> &false; </_hppectsvisible> <!-- DEFAULT : &true; -->
+	 
+	 <!-- what should the text in front say -->
+	 <_hpfronttext> HP </_hpfronttext> <!-- DEFAULT : HP -->
+	 
+	 <!-- what should the text behind say -->
+	 <_hppecttext> % </_hppecttext> <!-- DEFAULT : % -->
+	 
+	 <!-- Adjust the position of the front text -->
+	 <_hptextx> 45 </_hptextx> <!-- DEFAULT : 45 -->
+	 <_hptexty> -9 </_hptexty> <!-- DEFAULT : -9 -->
+	 
+	 <!-- Space between front text and the number -->
+	 <_hpfrontspace> 38 </_hpfrontspace> <!-- DEFAULT : 38 -->
+	 
+	 <!-- Space between the number and the % -->
+	 <_hppectspace> 3 </_hppectspace> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Set the font -->
+	 <_hptextfont> 3 </_hptextfont> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Adjust the text -->
+	 <_hptextred> 255 </_hptextred> <!-- DEFAULT : 255 -->
+	 <_hptextgreen> 150 </_hptextgreen> <!-- DEFAULT : 150 -->
+	 <_hptextblue> 150 </_hptextblue> <!-- DEFAULT : 150 -->
+	 <_hptextalpha> 255 </_hptextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_hptextsred> 0 </_hptextsred> <!-- DEFAULT : 0 -->
+	 <_hptextsgreen> 0 </_hptextsgreen> <!-- DEFAULT : 0 -->
+	 <_hptextsblue> 0 </_hptextsblue> <!-- DEFAULT : 0 -->
+	 <_hptextsalpha> 255 </_hptextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_hpsoffsetx> 2 </_hpsoffsetx> <!-- DEFAULT : 2 -->
+	 <_hpsoffsety> 2 </_hpsoffsety> <!-- DEFAULT : 2 -->
+
+
+<!--------------------------------------------------------------------------------------
+									MAGICA BAR
+----------------------------------------------------------------------------------------
+	
+		- This allows you to adjust the bar
+	 -->
+	 
+	 <!-- The bar's scale -->
+	 <_mabarzoom> 100 </_mabarzoom> <!-- DEFAULT : 100 -->
+	 <_mabarmul> 163 </_mabarmul> <!-- DEFAULT : 163 -->
+	 <!-- Height of background, used to avoid line errors Must be scaled with bar scale -->
+	 <_mabarh> 16 </_mabarh> <!-- DEFAULT : 16 -->
+	 
+	 <!-- The bar's x / y position. Moves in relation to all status bars (set above) -->
+	 <_mabarx> 0 </_mabarx> <!-- DEFAULT : 0 -->
+	 <_mabary> 18 </_mabary> <!-- DEFAULT : 18 -->
+	 
+	 <!-- This is the red texture of the bar -->
+	 <_mabarfullheight> 11 </_mabarfullheight> <!-- DEFAULT : 11 -->
+	 <_mabarfully> 1 </_mabarfully> <!-- DEFAULT : 1 -->
+	 <_mabarfullx> 11 </_mabarfullx> <!-- DEFAULT : 11 -->
+	 
+	 <!-- The bar's edge X / Y, will have to be adjusted if you scale it.-->
+	 <_mabaredgex> 0 </_mabaredgex> <!-- DEFAULT : 0 -->
+	 <_mabaredgey> -1 </_mabaredgey> <!-- DEFAULT : -1 -->
+	 
+	 <!-- This is the bar itself-->
+	 <_mabaralpha> 255 </_mabaralpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- This is the marker that shows where on your bar you are-->
+	 <_mabaredgealpha> 255 </_mabaredgealpha> <!-- DEFAULT : 255 -->
+
+	 <!-- This is background behind your bar (visible when you lose magica)-->
+	 <_mabaremptyalpha> 255 </_mabaremptyalpha> <!-- DEFAULT : 255 -->
+
+<!--------------------------------------------------------------------------------------
+									MAGICA BAR TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		NOTE:
+			The shadows colors are linked
+			The text colors are linked
+			All fonts are linked
+	 -->
+	 
+	 <!-- FRONT TEXT -->
+	 <_matextfvisible> &false; </_matextfvisible> <!-- DEFAULT : &true; -->
+	 <!-- FRONT TEXT SHADOW -->
+	 <_matextfsvisible> &false; </_matextfsvisible> <!-- DEFAULT : &true; -->
+	 <!-- TEXT -->
+	 <_matextvisible> &false; </_matextvisible> <!-- DEFAULT : &true; -->
+	 <!-- SHADOW -->
+	 <_matextsvisible> &false; </_matextsvisible> <!-- DEFAULT : &true; -->
+	 <!-- % TEXT -->
+	 <_mapectvisible> &false; </_mapectvisible> <!-- DEFAULT : &true; -->
+	 <!-- % SHADOW -->
+	 <_mapectsvisible> &false; </_mapectsvisible> <!-- DEFAULT : &true; -->
+	 
+	 <!-- what should the text in front say -->
+	 <_mafronttext> MA </_mafronttext> <!-- DEFAULT : MA -->
+	 
+	 <!-- what should the text behind say -->
+	 <_mapecttext> % </_mapecttext> <!-- DEFAULT : % -->
+	 
+	 <!-- Adjust the position of the front text -->
+	 <_matextx> 45 </_matextx> <!-- DEFAULT : 45 -->
+	 <_matexty> -9 </_matexty> <!-- DEFAULT : -9 -->
+	 
+	 <!-- Space between front text and the number -->
+	 <_mafrontspace> 38 </_mafrontspace> <!-- DEFAULT : 38 -->
+	 
+	 <!-- Space between the number and the % -->
+	 <_mapectspace> 5 </_mapectspace> <!-- DEFAULT : 5 -->
+	 
+	 <!-- Set the font -->
+	 <_matextfont> 3 </_matextfont> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Adjust the text-->
+	 <_matextred> 150 </_matextred> <!-- DEFAULT : 150 -->
+	 
+	 <_matextgreen>	150 </_matextgreen> <!-- DEFAULT : 150 -->
+	 
+	 <_matextblue> 255 </_matextblue> <!-- DEFAULT : 255 -->
+	 
+	 <_matextalpha> 255 </_matextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_matextsred> 0 </_matextsred> <!-- DEFAULT : 0 -->
+	 <_matextsgreen> 0 </_matextsgreen> <!-- DEFAULT : 0 -->
+	 <_matextsblue> 0 </_matextsblue> <!-- DEFAULT : 0 -->
+	 <_matextsalpha> 255 </_matextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_masoffsetx> 2 </_masoffsetx> <!-- DEFAULT : 2 -->
+	 <_masoffsety> 2 </_masoffsety> <!-- DEFAULT : 2 -->
+
+
+<!--------------------------------------------------------------------------------------
+									  FATIGUE BAR
+----------------------------------------------------------------------------------------
+	
+		- This allows you to adjust the bar
+	 -->
+	 
+	 <!-- The bar's scale-->
+	 <_fabarzoom> 100 </_fabarzoom> <!-- DEFAULT : 100 -->
+	 <_fabarmul> 163 </_fabarmul> <!-- DEFAULT : 163 -->
+	 <!-- Height of background, used to avoid line errors Must be scaled with bar scale -->
+	 <_fabarh> 16 </_fabarh> <!-- DEFAULT : 16 -->
+	 
+	 <!-- The bar's x / y position. Moves in relation to all status bars (set above)-->
+	 <_fabarx> 0 </_fabarx> <!-- DEFAULT : 0 -->
+	 <_fabary> 36 </_fabary> <!-- DEFAULT : 36 -->
+	 
+	 <!-- This is the red texture of the bar -->
+	 <_fabarfullheight> 11 </_fabarfullheight> <!-- DEFAULT : 11 -->
+	 <_fabarfully> 1 </_fabarfully> <!-- DEFAULT : 1 -->
+	 <_fabarfullx> 11 </_fabarfullx> <!-- DEFAULT : 11 -->
+	 
+	 
+	 
+	 <!-- The bar's edge X / Y, will have to be adjusted if you scale it.-->
+	 <_fabaredgex> 0 </_fabaredgex> <!-- DEFAULT : 0 -->
+	 <_fabaredgey> 0 </_fabaredgey> <!-- DEFAULT : 0 -->
+	 
+	 <!-- This is the bar itself-->
+	 <_fabaralpha> 255 </_fabaralpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- This is the marker that shows where on your bar you are-->
+	 <_fabaredgealpha> 255 </_fabaredgealpha> <!-- DEFAULT : 255 -->
+
+	 <!-- This is background behind your bar (visible when you lose fatigue)-->
+	 <_fabaremptyalpha> 255 </_fabaremptyalpha> <!-- DEFAULT : 255 -->
+	 
+	 
+<!--------------------------------------------------------------------------------------
+								   FATIGUE BAR TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		NOTE:
+			The shadows colors are linked
+			The text colors are linked
+			All fonts are linked
+	 -->
+	 
+	 <!-- FRONT TEXT -->
+	 <_fatextfvisible> &false; </_fatextfvisible> <!-- DEFAULT : &true; -->
+	 <!-- FRONT TEXT SHADOW -->
+	 <_fatextfsvisible> &false; </_fatextfsvisible> <!-- DEFAULT : &true; -->
+	 <!-- TEXT -->
+	 <_fatextvisible> &false; </_fatextvisible> <!-- DEFAULT : &true; -->
+	 <!-- SHADOW -->
+	 <_fatextsvisible> &false; </_fatextsvisible> <!-- DEFAULT : &true; -->
+	 <!-- % TEXT -->
+	 <_fapectvisible> &false; </_fapectvisible> <!-- DEFAULT : &true; -->
+	 <!-- % SHADOW -->
+	 <_fapectsvisible> &false; </_fapectsvisible> <!-- DEFAULT : &true; -->
+	 
+	 <!-- what should the text in front say -->
+	 <_fafronttext> FA </_fafronttext> <!-- DEFAULT : FA -->
+	 
+	 <!-- what should the text behind say -->
+	 <_fapecttext> % </_fapecttext> <!-- DEFAULT : % -->
+	 
+	 <!-- Adjust the position of the front text -->
+	 <_fatextx> 45 </_fatextx> <!-- DEFAULT : 45 -->
+	 <_fatexty> -9 </_fatexty> <!-- DEFAULT : -9 -->
+	 
+	 <!-- Space between front text and the number -->
+	 <_fafrontspace> 38 </_fafrontspace> <!-- DEFAULT : 38 -->
+	 
+	 <!-- Space between the number and the % -->
+	 <_fapectspace> 5 </_fapectspace> <!-- DEFAULT : 5 -->
+	 
+	 <!-- Set the font -->
+	 <_fatextfont> 3 </_fatextfont> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Adjust the text-->
+	 <_fatextred> 150 </_fatextred> <!-- DEFAULT : 150 -->
+	 <_fatextgreen> 255 </_fatextgreen> <!-- DEFAULT : 255 -->
+	 <_fatextblue> 150 </_fatextblue> <!-- DEFAULT : 150 -->
+	 <_fatextalpha> 255 </_fatextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_fatextsred> 0 </_fatextsred> <!-- DEFAULT : 0 -->
+	 <_fatextsgreen> 0 </_fatextsgreen> <!-- DEFAULT : 0 -->
+	 <_fatextsblue> 0 </_fatextsblue> <!-- DEFAULT : 0 -->
+	 <_fatextsalpha> 255 </_fatextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_fasoffsetx> 2 </_fasoffsetx> <!-- DEFAULT : 2 -->
+	 <_fasoffsety> 2 </_fasoffsety> <!-- DEFAULT : 2 -->
+	 
+<!--------------------------------------------------------------------------------------
+								  	 WEAPON ICON
+----------------------------------------------------------------------------------------
+	
+		- These options adjust the icon for equipped weapon
+		- Also adjusts ammo text and status alignment icon.
+		
+	 -->
+	 
+	 
+	 <!-- Icon size. All these should be adjusted if you want to adjust the icon size -->
+	 <_wepwidth> 63 </_wepwidth> <!-- DEFAULT : 63 -->
+	 <_wepheight> 63 </_wepheight> <!-- DEFAULT : 63 -->
+	 <_wepzoom> 100 </_wepzoom> <!-- DEFAULT : 100 -->
+	 
+	 <!-- Location of the icon -->
+	 <_wepx> 229 </_wepx> <!-- DEFAULT : 229 -->
+	 <_wepy> 5 </_wepy> <!-- DEFAULT : 5 -->
+	 
+	 <!-- Weapon Fade
+	 
+	 	Basically the first value is how much alpha should be removed when the weapon is below
+	 	the % value. The second is the amount of alpha you want to keep. So if you set second to
+	 	255 and set % to 0 then wepon won't be faded even when it is close to breaking.
+	 
+	 -->
+	 
+	 <_wepalpha1> 128 </_wepalpha1> <!-- DEFAULT : 128 -->
+	 <_wepalpha2> 128 </_wepalpha2> <!-- DEFAULT : 128 -->
+	 <!-- % value that weapon should be faded at -->
+	 <_wepalphapre> 50 </_wepalphapre> <!-- DEFAULT : 50 -->
+	 
+	 <!-- Weapon Status icons (Stolen, poisoned, magic, etc..) -->
+	 
+	 <_wepstatusoffx> 0 </_wepstatusoffx> <!-- DEFAULT : 0 -->
+	 <_wepstatusoffy> 0 </_wepstatusoffy> <!-- DEFAULT : 0 -->
+	 
+	 <!-- These are height modifiers for the weapon status.
+	 	BEIDER COMMENT
+	 		These first one is the default height, the second one
+	 		is added when it is only the hand visilbe. If you scale the icon
+	 		these need to be adjusted to keep a line bug from appearing when
+	 		you have only stolen icon.
+	 -->
+	 <_wepstatush1> 32 </_wepstatush1> <!-- DEFAULT : 32 -->
+	 <_wepstatush2> 24 </_wepstatush2> <!-- DEFAULT : 24 -->
+	 
+	  <!-- These are width modifiers for the weapon status.
+	 	BEIDER COMMENT
+	 		These first one is the default height, the second one
+	 		is added when it is only the hand visilbe. If you scale the icon
+	 		these need to be adjusted to keep a line bug from appearing when
+	 		you have only stolen icon.
+	 -->
+	 <_wepstatusw1> 64 </_wepstatusw1> <!-- DEFAULT : 32 -->
+	 <_wepstatusw2> 32 </_wepstatusw2> <!-- DEFAULT : 24 -->
+	 
+	 <_wepstatuszoom> 100 </_wepstatuszoom> <!-- DEFAULT : 100 -->
+	 <_wepstatusalpha> 255 </_wepstatusalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Weapon ammo -->
+	 
+	 <!-- offsets -->
+	 <_waox> 65 </_waox> <!-- DEFAULT : 65 -->
+	 <_waoy> 44 </_waoy> <!-- DEFAULT : 44 -->
+	 
+	 <!-- font, colors and alpha -->
+	 <_waf> 3 </_waf>   <!-- DEFAULT : 3   -->
+	 <_war> 254 </_war> <!-- DEFAULT : 254 -->
+	 <_wag> 244 </_wag> <!-- DEFAULT : 244 -->
+	 <_wab> 183 </_wab> <!-- DEFAULT : 183 -->
+	 <_waa> 255 </_waa> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Weapon ammo shadow-->
+	 
+	 <!-- offsets -->
+	 <_wasox> 2 </_wasox> <!-- DEFAULT : 2 -->
+	 <_wasoy> 2 </_wasoy> <!-- DEFAULT : 2 -->
+	 
+	 <!-- colors and alpha -->
+	 <_wasr> 0 </_wasr> <!-- DEFAULT : 0 -->
+	 <_wasg> 0 </_wasg> <!-- DEFAULT : 0 -->
+	 <_wasb> 0 </_wasb> <!-- DEFAULT : 0 -->
+	 <_wasa> 192 </_wasa> <!-- DEFAULT : 192 -->
+
+
+<!--------------------------------------------------------------------------------------
+								  	 MAGIC ICON
+----------------------------------------------------------------------------------------
+	
+		- These options adjust the icon for current magic spell.
+		
+	 -->
+
+	 <!-- X / Y -->
+	 <_mix> 324 </_mix> <!-- DEFAULT : 324 -->
+	 <_miy> 5 </_miy>   <!-- DEFAULT : 5   -->
+	 
+	 <!-- Width / Height / Zoom -->
+	 <_miw> 63 </_miw>  <!-- DEFAULT : 63  -->
+	 <_mih> 63 </_mih>  <!-- DEFAULT : 63  -->
+	 <_miz> 100 </_miz> <!-- DEFAULT : 100 -->
+	 
+	 <!-- Alpha1 / Alpha2-->
+	 
+	 <!--
+	 	Alpha 2 is always added to the total alpha while
+	 	Alpha 1 is only added when the spell is castable (As in have enough magica, etc..)
+	 -->
+	 
+	 <_mia1> 128 </_mia1> <!-- DEFAULT : 128 -->
+	 <_mia2> 128 </_mia2> <!-- DEFAULT : 128 -->
+	 
+	 
+<!--------------------------------------------------------------------------------------
+								  	 COMPASS
+----------------------------------------------------------------------------------------
+	
+		- Adjust the compass
+		
+	 -->
+	 
+	 <!-- X / Y -->
+	 <_cx> 407 </_cx> <!-- DEFAULT : 407 -->
+	 <_cy> 5 </_cy>   <!-- DEFAULT : 5   -->
+	 
+	 <!-- Visible -->
+	 <_cv> &true; </_cv> <!-- DEFAULT : &true; -->
+	 
+<!--------------------------------------------------------------------------------------
+								  	 LEVELUP ICON
+----------------------------------------------------------------------------------------
+	
+		- Adjust the levelup icon
+		
+	 -->
+	 
+	 <!-- X / Y -->
+	 <_lix> 624 </_lix> <!-- DEFAULT : 624 -->
+	 <_liy> 6 </_liy>   <!-- DEFAULT : 6   -->
+	 
+	 
+	 <!-- Width / Height / Zoom -->
+	 
+	 <_liw> 63 </_liw>  <!-- DEFAULT : 63 -->
+	 <_lih> 63 </_lih>  <!-- DEFAULT : 63 -->
+	 <_liz> 100 </_liz> <!-- DEFAULT : 100 -->
+	 
+	 <!-- Visible -->
+	 <_lia> 255 </_lia> <!-- DEFAULT : 255 -->
+	 
+	 
+	 
+<!--------------------------------------------------------------------------------------
+								  	 EFFECT ICONS
+----------------------------------------------------------------------------------------
+	
+		- Adjust the active effect icons (top right of screen)
+		
+	 -->
+	 
+	 <!-- This is the adjustment for Width / Height -->
+	 <_aeaw> 1.33 </_aeaw> <!-- DEFAULT : 1.33 -->
+	 <_aeah> 1.33 </_aeah> <!-- DEFAULT : 1.33 -->
+	 
+	 <!-- This is to adjust icon spacing -->
+	 <_aeis> 8 </_aeis> <!-- DEFAULT : 8 -->
+	 
+	 <!-- Zoom -->
+	 <_aez> 75 </_aez> <!-- DEFAULT : 75 -->
+	 
+	 <!-- Turn this to false to hide the graphical timer, it doesn't scale -->
+	 <_arctimer> &true; </_arctimer>  <!-- DEFAULT : &true; -->
+	 
+	 <!-- Icons per row, set to 1 to make them go vertical -->
+	 <_aeipr> 15 </_aeipr> <!-- DEFAULT : 15 -->
+	 
+	 <!-- X and Y positions -->
+	 <!--
+	 	BEIDER COMMENT
+	 		These calculations are the default calculations,
+	 		i moved them all in here so it is easier to tweak it
+	 		to move the icon exactly where you want.
+	 		
+	 		You can add more calculations like,
+	 		<add> value </add> - Addition
+	 		<sub> value </sub> - Subtraction
+	 		<mul> value </mul> - Multiplication
+	 		<div> value </div> - Division
+	 		
+	 		Also possible to use
+	 		
+	 		<copy src="screen()" trait="width"/> - The screen width
+	 		<copy src="screen()" trait="height"/> - The screen height
+	 		
+	 		Remember, this can be used on any X / Y value in all configs.
+	 		
+	 		Or just remove all calculatons and just set a number
+	 		
+	 		<_aex> 50 </_aex>
+	 -->
+ 	<_aex>
+		<copy src="screen()" trait="width"/>
+		<sub>
+			<copy src="screen()" trait="cropx"/>
+			<mult>2</mult>
+		</sub>
+		<sub> 24 </sub> <!-- If you just change this then it will move relative to top right corner -->
+	</_aex>
+	
+	<_aey>
+		<copy> 0 </copy>
+		<add>
+			<copy src="screen()" trait="cropx"/>
+			<mult>2</mult>
+		</add>
+		<add> 18 </add> <!-- If you just change this then it will move relative to top right corner -->
+	</_aey>
+	
+	
+	<!-- Countdown text settings -->
+	
+	<!-- Red / Green / Blue / Font / Alpha -->
+	<_aectr> 255 </_aectr> <!-- DEFAULT : 255 -->
+	<_aectg> 255 </_aectg> <!-- DEFAULT : 255 -->
+	<_aectb> 255 </_aectb> <!-- DEFAULT : 255 -->
+	<_aectf> 2 </_aectf>   <!-- DEFAULT : 2   -->
+	<_aecta> 255 </_aecta> <!-- DEFAULT : 255 -->
+	
+	<!-- X / Y -->
+	<!-- 
+		BEIDER COMMENT
+		 The first value when set to true makes the text calculate it's position based
+		 on it's width and the icon with. Thus centering itself over it or wherever you
+		 want it. Just use the second value for adjustments. If you turn it to false
+		 then the second value is the one that counts.
+	-->
+	<_aectxc> &true; </_aectxc> <!-- DEFAULT : &true; -->
+	<_aectx> -2 </_aectx> 		<!-- DEFAULT : -2 -->
+	<_aecty> -40 </_aecty> 		<!-- DEFAULT : -40 -->
+	
+	
+<!--------------------------------------------------------------------------------------
+							ONSCREEN WARNINGS FOR LOW HP
+----------------------------------------------------------------------------------------
+	
+	BEIDER COMMENT
+		This is a new feature I implemented into the HUD. It allows you to have
+		warnings on your screen when you run low oh HP, MA, FA.
+		
+		- Enable / Disable warnings
+		- Adjust the text, fonts, positions, colors.
+		
+		
+		COOL EFFECT (Credit to Cheeseness for this):
+		
+		Set red to 255 and blue to 0 then
+		
+		put the following text in green:
+		
+		<copy> 255 </copy>
+	 	<mul>
+			<copy src="hudmain_health_full" trait="width"/>
+			<div src="Imp_UI_Settings" trait="_hpbarmul"/>
+			<mul>100</mul>
+	 		<div> 100 </div>
+	 	</mul>
+	 	
+	 	
+	 	This will make the text go from yellow to red. So basically it will start on yellow at 100%
+	 	then go to more and more orange until 50% and then shift into complete red at 0%.
+	 	
+	 	This code can also be used on Alpha settings to make stuff fade in / out depending on HP, magica or fatigue.
+	 	just replace hudmain_health_full with hudmain_magic_full or hudmain_fatigue_full
+	 	
+	 	WARNING!
+	 		DO NOT TRY TO USE THIS EFFECT ON MULTIPLE COLORS AT ONCE! YOU WILL JUST END UP WITH A BLINKING EFFECT!
+	 -->
+	 
+	 <!-- This decides at what % of HP the text becomes visible, set it to -1 to disable -->
+	 <_hpwtextvisible> -1 </_hpwtextvisible> <!-- DEFAULT : -1 -->
+	 
+	 <!-- SHADOW -->
+	 <_hpwtextsvisible> &false; </_hpwtextsvisible> <!-- DEFAULT : &false; -->
+	 
+	 
+	 <!-- what should the text say -->
+	 <_hpwfronttext> Warning! HP Critical! </_hpwfronttext> <!-- DEFAULT : Warning! HP Critical! -->
+	 
+	 <!-- Adjust the position of the text -->
+	 <_hpwtextx> 500 </_hpwtextx>  <!-- DEFAULT : 500 -->
+	 <_hpwtexty> -700 </_hpwtexty> <!-- DEFAULT : -700 -->
+	 
+	 <!-- Set the font -->
+	 <_hpwtextfont> 2 </_hpwtextfont> <!-- DEFAULT : 2 -->
+	 
+	 <!-- Adjust the text-->
+	 <_hpwtextred> 255 </_hpwtextred> <!-- DEFAULT : 255 -->
+	 <_hpwtextgreen>
+	 	<copy> 255 </copy>
+	 	<mul>
+			<copy src="hudmain_health_full" trait="width"/>
+			<div src="Imp_UI_Settings" trait="_hpbarmul"/>
+			<mul>100</mul>
+	 		<div> 100 </div>
+	 	</mul>
+	 </_hpwtextgreen> <!-- DEFAULT : Code above -->
+	 <_hpwtextblue> 0 </_hpwtextblue> <!-- DEFAULT : 0 -->
+	 <_hpwtextalpha> 255 </_hpwtextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_hpwtextsred> 0 </_hpwtextsred> 		<!-- DEFAULT : 0 -->
+	 <_hpwtextsgreen> 0 </_hpwtextsgreen> 	<!-- DEFAULT : 0 -->
+	 <_hpwtextsblue> 0 </_hpwtextsblue> 	<!-- DEFAULT : 0 -->
+	 <_hpwtextsalpha> 255 </_hpwtextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_hpwsoffsetx> 2 </_hpwsoffsetx> <!-- DEFAULT : 2 -->
+	 <_hpwsoffsety> 2 </_hpwsoffsety> <!-- DEFAULT : 2 -->
+	 
+	 
+<!--------------------------------------------------------------------------------------
+							ONSCREEN WARNINGS FOR LOW MA
+----------------------------------------------------------------------------------------
+	
+	BEIDER COMMENT
+		This is a new feature I implemented into the HUD. It allows you to have
+		warnings on your screen when you run low oh HP, MA, FA.
+		
+		- Enable / Disable warnings
+		- Adjust the text, fonts, positions, colors.
+		
+	 -->
+	 
+	 <!-- This decides at what % of MA the text becomes visible, set it to -1 to disable -->
+	 <_mawtextvisible> -1 </_mawtextvisible> <!-- DEFAULT : -1 -->
+	 
+	 <!-- SHADOW -->
+	 <_mawtextsvisible> &false; </_mawtextsvisible> <!-- DEFAULT : &false; -->
+	 
+	 
+	 <!-- what should the text say -->
+	 <_mawfronttext> Magica is running low </_mawfronttext> <!-- DEFAULT : Magica is running low -->
+	 
+	 <!-- Adjust the position of the text -->
+	 <_mawtextx> 500 </_mawtextx> <!-- DEFAULT : 500 -->
+	 <_mawtexty> -660 </_mawtexty> <!-- DEFAULT : -660 -->
+	 
+	 <!-- Set the font -->
+	 <_mawtextfont> 2 </_mawtextfont> <!-- DEFAULT : 2 -->
+	 
+	 <!-- Adjust the text-->
+	 <_mawtextred> 150 </_mawtextred> <!-- DEFAULT : 150 -->
+	 <_mawtextgreen> 150 </_mawtextgreen> <!-- DEFAULT : 150 -->
+	 <_mawtextblue> 255 </_mawtextblue> <!-- DEFAULT : 255 -->
+	 <_mawtextalpha> 255 </_mawtextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_mawtextsred> 0 </_mawtextsred> 	<!-- DEFAULT : 0 -->
+	 <_mawtextsgreen> 0 </_mawtextsgreen> 	<!-- DEFAULT : 0 -->
+	 <_mawtextsblue> 0 </_mawtextsblue> 	<!-- DEFAULT : 0 -->
+	 <_mawtextsalpha> 255 </_mawtextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_mawsoffsetx> 2 </_mawsoffsetx> <!-- DEFAULT : 2 -->
+	 <_mawsoffsety> 2 </_mawsoffsety> <!-- DEFAULT : 2 -->
+	 
+	 
+<!--------------------------------------------------------------------------------------
+							ONSCREEN WARNINGS FOR LOW FA
+----------------------------------------------------------------------------------------
+	
+	BEIDER COMMENT
+		This is a new feature I implemented into the HUD. It allows you to have
+		warnings on your screen when you run low oh HP, MA, FA.
+		
+		- Enable / Disable warnings
+		- Adjust the text, fonts, positions, colors.
+		
+	 -->
+	 
+	 <!-- This decides at what % of FA the text becomes visible, set it to -1 to disable -->
+	 <_fawtextvisible> -1 </_fawtextvisible> <!-- DEFAULT : -1 -->
+	 
+	 <!-- SHADOW -->
+	 <_fawtextsvisible> &false; </_fawtextsvisible> <!-- DEFAULT : &false; -->
+	 
+	 
+	 <!-- what should the text say -->
+	 <_fawfronttext> Fatigue is running low </_fawfronttext> <!-- DEFAULT : Fatigue is running low -->
+	 
+	 <!-- Adjust the position of the text -->
+	 <_fawtextx> 500 </_fawtextx> <!-- DEFAULT : 500 -->
+	 <_fawtexty> -620 </_fawtexty> <!-- DEFAULT : -620 -->
+	 
+	 <!-- Set the font -->
+	 <_fawtextfont> 2 </_fawtextfont> <!-- DEFAULT : 2 -->
+	 
+	 <!-- Adjust the text-->
+	 <_fawtextred> 150 </_fawtextred> 		<!-- DEFAULT : 150 -->
+	 <_fawtextgreen> 255 </_fawtextgreen> 	<!-- DEFAULT : 255 -->
+	 <_fawtextblue> 150 </_fawtextblue> 	<!-- DEFAULT : 150 -->
+	 <_fawtextalpha> 255 </_fawtextalpha>	<!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_fawtextsred> 0 </_fawtextsred> 		<!-- DEFAULT : 0 -->
+	 <_fawtextsgreen> 0 </_fawtextsgreen> 	<!-- DEFAULT : 0 -->
+	 <_fawtextsblue> 0 </_fawtextsblue> 	<!-- DEFAULT : 0 -->
+	 <_fawtextsalpha> 255 </_fawtextsalpha>	<!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_fawsoffsetx> 2 </_fawsoffsetx> <!-- DEFAULT : 2 -->
+	 <_fawsoffsety> 2 </_fawsoffsety> <!-- DEFAULT : 2 -->
+
+<!--------------------------------------------------------------------------------------
+									DURABILITY BAR
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		This is a completely new feature I added to the HUD. The code for the durability
+		text was already here but I decided to make a bar as well.
+		
+		This moves in relation to the weapon icon
+	-->
+	 
+	 <!-- The bar's scale-->
+	 <_durbarzoom> 50 </_durbarzoom> <!-- DEFAULT : 50 -->
+	 <_durbarmul> 81.5 </_durbarmul> <!-- DEFAULT : 81.5 -->
+	 
+	 <!-- Height, used to avoid line errors -->
+	 <_durbarh> 8 </_durbarh> <!-- DEFAULT : 8 -->
+	 
+	 <!-- The bar's x / y position.-->
+	 <_durbarx> -10 </_durbarx> <!-- DEFAULT : -10 -->
+	 <_durbary> 70 </_durbary> <!-- DEFAULT : 70 -->
+	 
+	 <!-- This is the texture of the bar -->
+	 <_durbarfullheight> 5 </_durbarfullheight> 	<!-- DEFAULT : 10 -->
+	 <_durbarfully> 1 </_durbarfully> 	<!-- DEFAULT : 1 -->
+	 <_durbarfullx> 7 </_durbarfullx> 	<!-- DEFAULT : 5 -->
+	 
+	 <!-- The color of the texture, this is a bit tricky since the base is red (hp bar) -->
+	 <_durbarr> 50 </_durbarr> <!-- DEFAULT : 50 -->
+	 <_durbarg> 50 </_durbarg> <!-- DEFAULT : 50 -->
+	 <_durbarb> 50 </_durbarb> <!-- DEFAULT : 50 -->
+	 
+	 <!-- The bar's edge X / Y, will have to be adjusted if you scale it.-->
+	 <_durbaredgex> 0 </_durbaredgex> <!-- DEFAULT : 0 -->
+	 <_durbaredgey> -1 </_durbaredgey> <!-- DEFAULT : 0 -->
+	 
+	 <!-- This is the bar itself-->
+	 <_durbaralpha> 255 </_durbaralpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- This is the marker that shows where on your bar you are-->
+	 <_durbaredgealpha> 255 </_durbaredgealpha> <!-- DEFAULT : 255 -->
+
+	 <!-- This is background behind your bar (visible when you lose weapon durability)-->
+	 <_durbaremptyalpha> 255 </_durbaremptyalpha> <!-- DEFAULT : 255 -->
+	 
+<!--------------------------------------------------------------------------------------
+									DURABILITY TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		NOTE:
+			The shadows colors are linked
+			The text colors are linked
+			All fonts are linked
+	 -->
+	 
+	 <!-- FRONT TEXT -->
+	 <_durtextfvisible> &false; </_durtextfvisible> <!-- DEFAULT : &false; -->
+	 <!-- FRONT TEXT SHADOW -->
+	 <_durtextfsvisible> &false; </_durtextfsvisible> <!-- DEFAULT : &false; -->
+	 <!-- TEXT -->
+	 <_durtextvisible> &false; </_durtextvisible> <!-- DEFAULT : &false; -->
+	 <!-- SHADOW -->
+	 <_durtextsvisible> &false; </_durtextsvisible> <!-- DEFAULT : &false; -->
+	 <!-- % TEXT -->
+	 <_durpectvisible> &false; </_durpectvisible> <!-- DEFAULT : &false; -->
+	 <!-- % SHADOW -->
+	 <_durpectsvisible> &false; </_durpectsvisible> <!-- DEFAULT : &false; -->
+	 
+	 <!-- what should the text in front say -->
+	 <_durfronttext> WHP: </_durfronttext> <!-- DEFAULT : WHP: -->
+	 
+	 <!-- what should the text behind say -->
+	 <_durpecttext> % </_durpecttext> <!-- DEFAULT : % -->
+	 
+	 <!-- Adjust the position of the front text -->
+	 <_durtextx> 0 </_durtextx> <!-- DEFAULT : 0 -->
+	 <_durtexty> 4 </_durtexty> <!-- DEFAULT : 4 -->
+	 
+	 <!-- Space between front text and the number -->
+	 <_durfrontspace> 60 </_durfrontspace> <!-- DEFAULT : 60 -->
+	 
+	 <!-- Space between the number and the % -->
+	 <_durpectspace> 3 </_durpectspace> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Set the font -->
+	 <_durtextfont> 3 </_durtextfont> <!-- DEFAULT : 3 -->
+	 
+	 <!-- Adjust the text-->
+	 <_durtextred> 157 </_durtextred> <!-- DEFAULT : 157 -->
+	 <_durtextgreen> 74 </_durtextgreen> <!-- DEFAULT : 74 -->
+	 <_durtextblue> 67 </_durtextblue> <!-- DEFAULT : 67 -->
+	 <_durtextalpha> 255 </_durtextalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_durtextsred> 0 </_durtextsred> <!-- DEFAULT : 0 -->
+	 <_durtextsgreen> 0 </_durtextsgreen> <!-- DEFAULT : 0 -->
+	 <_durtextsblue> 0 </_durtextsblue> <!-- DEFAULT : 0 -->
+	 <_durtextsalpha> 255 </_durtextsalpha> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_dursoffsetx> 2 </_dursoffsetx> <!-- DEFAULT : 2 -->
+	 <_dursoffsety> 2 </_dursoffsety> <!-- DEFAULT : 2 -->
+	 
+	 
+	 
+<!--------------------------------------------------------------------------------------
+									   TEXTURES
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		This section is just here to allow quick and easy change of textures for skinners.
+		
+	-->
+	
+	<_hudback> Menus\HUD\hud_back.dds </_hudback>
+	<_hudframe> Menus\HUD\hud_frame.dds </_hudframe>
+	<_hudxboxlt> Menus\HUD\hud_xbox_lt.dds </_hudxboxlt>
+	<_hudxboxrt> Menus\HUD\hud_xbox_rt.dds </_hudxboxrt>
+	
+	<_ribbonslider> Menus\Shared\ribbon_slider.dds </_ribbonslider>
+	
+	<_hudribbonhpe> Menus\HUD\hud_ribbon_health_empty.dds </_hudribbonhpe>
+	<_hudribbonhpf> Menus\HUD\hud_ribbon_health_full.dds </_hudribbonhpf>
+
+	<_hudribbonmae> Menus\HUD\hud_ribbon_magic_empty.dds </_hudribbonmae>
+	<_hudribbonmaf> Menus\HUD\hud_ribbon_magic_full.dds </_hudribbonmaf>
+	
+	<_hudribbonfae> Menus\HUD\hud_ribbon_fatigue_empty.dds </_hudribbonfae>
+	<_hudribbonfaf> Menus\HUD\hud_ribbon_fatigue_full.dds </_hudribbonfaf>
+	
+	<_huddurabilitye> Menus\HUD\hud_ribbon_health_empty.dds </_huddurabilitye>
+	<_huddurabilityf> Menus\HUD\hud_ribbon_health_full.dds </_huddurabilityf>
+	
+	<_ihdw> Menus\Icons\icon_hud_default_weapon.dds </_ihdw>
+	<_ihdm> Menus\Icons\icon_hud_default_magic.dds </_ihdm>
+	<_ilu> Menus\Icons\icon_level_up.dds </_ilu>
+	
+	<_hcf> Menus\HUD\hud_compass_frame.dds </_hcf>
+	
+	<_mia> Menus\Icons\Map\map_icons_all.dds </_mia>
+	<_hcg> Menus\HUD\hud_compass_goal.dds </_hcg>
+	
+	<_hcfa> Menus\HUD\hud_compass_face.dds </_hcfa>
+	<_wmai> Menus\Map\world_map_arrow_icon.dds </_wmai>
+	 
+</rect>
+

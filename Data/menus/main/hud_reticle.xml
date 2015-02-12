@@ -1,0 +1,170 @@
+<!-- hud_reticle.xml -->
+<rect name="HUDReticle">
+	<visible> &false; </visible>
+	<stackingtype> &does_not_stack; </stackingtype>
+	<alpha>	0 </alpha>
+	<locus> &true; </locus>
+	<depth> -10 </depth>
+	<x>
+		<copy src="screen()" trait="width"/>
+		<div> 2 </div>
+	</x>
+	<y>
+		<copy src="screen()" trait="height"/>
+		<div> 2 </div>
+	</y>
+	<menufade> 0.25 </menufade>
+	
+<!-- SETTINGS ===========================================================================-->
+	
+	<!--
+		****************************************************************************************
+		* BEIDER COMMENT
+		*
+		* This is a settings section we made to make changing the looks and feel of the UI
+		* easier and faster. You may find the config file at this path,
+		* Oblivion\Data\menus\prefabs\ui_config\hudreticle_config.xml
+		*
+		* QUICKFIND : SETTINGS01
+		*
+		****************************************************************************************
+	-->
+		<include src="ui_config\hudreticle_config.xml"/>
+	
+	<rect name="hudreticle_reticle">
+		<id> 1 </id>
+		<locus> &true; </locus>
+		<user1> &false; </user1>	<!-- true if crime to take action -->
+		<user2> 128 </user2>		<!-- code set - alpha -->
+		<user3> 0.5 </user3>		<!-- fade speed -->
+		<user4> &false; </user4>	<!-- true = larger icon -->
+		<user5> 0 </user5>			<!-- icon type -->
+
+		<!-- These are the colors that the reticle should appear based
+			 on whether the player is stealing mousedover item	-->
+		<_red_stealing>   208 </_red_stealing>
+		<_green_stealing>   0 </_green_stealing>
+		<_blue_stealing>    0 </_blue_stealing>
+		
+		<!-- default crosshair image -->
+		<image name="hudreticle_reticle_crosshair">
+			<visible>
+				<copy src="parent()" trait="user5"/>
+				<eq> 0 </eq>
+			</visible>
+			<filename> Menus\Misc\hud_reticle.dds </filename>
+			<alpha>
+				<copy src="hudreticle_reticle_activate" trait="alpha"/>
+			</alpha>
+			<width> 37 </width>
+			<height> 37 </height>
+			<x> -18 </x>
+			<y> -18 </y>
+		</image>
+
+		<!-- image to show when crosshairs is indicating a particular type of object -->
+		<image name="hudreticle_reticle_activate">
+			<visible>
+				<copy src="parent()" trait="user5"/>
+				<gt> 0 </gt>
+			</visible>
+			<filename>
+				<copy> 1 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> 1 </add>
+				<copy src="me()" trait="_filename_"/>
+			</filename>
+			<_filename_1> Menus\Shared\all_small_activate_icons.dds </_filename_1>
+			<_filename_2> Menus\Shared\all_activate_icons.dds </_filename_2>
+			<cropx>
+				<copy> 30 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> 34 </add>
+				<mul>
+					<copy src="parent()" trait="user5"/>
+					<sub> 1 </sub>
+				</mul>
+			</cropx>
+			<red>
+				<copy src="parent()" trait="_red_stealing" />
+				<onlyif src="parent()" trait="user1"/>
+				<add>
+					<copy>255</copy>
+					<onlyifnot src="parent()" trait="user1"/>
+				</add>
+			</red>
+			<green>
+				<copy src="parent()" trait="_green_stealing" />
+				<onlyif src="parent()" trait="user1"/>
+				<add>
+					<copy>255</copy>
+					<onlyifnot src="parent()" trait="user1"/>
+				</add>
+			</green>
+			<blue>
+				<copy src="parent()" trait="_blue_stealing" />
+				<onlyif src="parent()" trait="user1"/>
+				<add>
+					<copy>255</copy>
+					<onlyifnot src="parent()" trait="user1"/>
+				</add>
+			</blue>
+			<alpha>
+				<copy src="parent()" trait="user2"/>
+			</alpha>
+			<width>
+				<copy> 30 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> 34 </add>
+			</width>
+			<height>
+				<copy> 32 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> 32 </add>
+			</height>
+			<x>
+				<copy> -16 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> -16 </add>
+			</x>
+			<y>
+				<copy> -16 </copy>
+				<onlyif> &xbox; </onlyif>
+				<add> -16 </add>
+			</y>
+		</image>
+	</rect>
+
+	<nif name="hudreticle_enemy_health">
+		<id> 2 </id>
+		<filename>Enemy Health Bar\Health_Bar01.NIF </filename>
+		<visible> &true; </visible>
+		<locus> &true; </locus>
+		<alpha> <copy src="me()" trait="user8"/> </alpha>
+		<x> -1 </x>
+		<y> -20 </y>
+		<user1> 1 </user1>
+		<user2> 0.0 </user2>
+		<user8> 0 </user8>	<!-- code set - alpha -->
+		<user9> 0.5 </user9>	<!-- fade speed -->
+		<animation> Health_Bar </animation>
+	</nif>
+		
+	<image name="hudreticle_sneak">
+		<id> 3 </id>
+		<visible> &true; </visible>
+		<filename> Menus\Icons\icon_small_eye.dds </filename>
+		<red> <copy src="Imp_UI_Settings" trait="_sneakr"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_sneakg"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_sneakb"/> </blue>
+		<zoom> <copy src="Imp_UI_Settings" trait="_sneakz"/> </zoom>
+		<alpha> <copy src="me()" trait="user8"/> </alpha>
+		<width> <copy src="Imp_UI_Settings" trait="_sneakw"/> </width>
+		<height> <copy src="Imp_UI_Settings" trait="_sneakh"/> </height>
+		<x> <copy src="Imp_UI_Settings" trait="_sneakx"/> </x>
+		<y> <copy src="Imp_UI_Settings" trait="_sneaky"/> </y>
+		<user8> 0 </user8>	<!-- code set - alpha -->
+		<user9> 0.5 </user9>	<!-- fade speed -->
+	</image>
+	
+</rect>

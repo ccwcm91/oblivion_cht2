@@ -1,0 +1,97 @@
+<!--
+	HUD SUBTITLE MENU CONFIG
+	CONFIG VERSION : 12 Slot, Default fonts
+	
+	CONFIG FOR BTMOD BY : Beider & Tikigod
+	CONFIG BY : Beider
+	
+	If you are make changes and want to test them without restarting the game then
+	open your console by hitting the tilde key (key left of the 1 key). Then type,
+		
+		reload hudsubtitlemenu
+		
+	Then hit the Tilde key again to exit the console.
+
+-->
+<rect name="Imp_UI_Settings">
+
+<!--------------------------------------------------------------------------------------
+									DIALOG TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		This is for the onscreen text, not the text you see during dialogs. The one that
+		appears when people around you talk.
+		
+		NOTE:
+			Font is linked for shadow and text
+	 -->
+	 
+	 <!-- SHADOW -->
+	 <_diatsv> &false; </_diatsv> <!-- DEFAULT : &false; -->
+	 
+	 <!-- Adjust the position of text -->
+	 <_diatx> 0 </_diatx> <!-- DEFAULT : 0 -->
+	 <_diaty> 0 </_diaty> <!-- DEFAULT : 0 -->
+	 
+	 <!-- Set the font -->
+	 <_diatf> 2 </_diatf> <!-- DEFAULT : 2 -->
+	 
+	 <!-- Adjust the text -->
+	 <_diatr> 254 </_diatr> <!-- DEFAULT : 254 -->
+	 <_diatg> 244 </_diatg> <!-- DEFAULT : 244 -->
+	 <_diatb> 183 </_diatb> <!-- DEFAULT : 183 -->
+	 <_diata> 255 </_diata> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_diatsr> 0 </_diatsr> <!-- DEFAULT : 0 -->
+	 <_diatsg> 0 </_diatsg> <!-- DEFAULT : 0 -->
+	 <_diatsb> 0 </_diatsb> <!-- DEFAULT : 0 -->
+	 <_diatsa> 255 </_diatsa> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_diasox> 2 </_diasox> <!-- DEFAULT : 2 -->
+	 <_diasoy> 2 </_diasoy> <!-- DEFAULT : 2 -->
+
+
+<!--------------------------------------------------------------------------------------
+									NOTICE TEXT
+----------------------------------------------------------------------------------------
+	 
+		- Here you can adjust the text
+		
+		This is for the onscreen text that appear when you autosave, etc.. Top left corner
+		is the default location of this text.
+		
+		NOTE:
+			Font is linked for shadow and text
+	 -->
+	 
+	 <!-- SHADOW -->
+	 <_nottsv> &false; </_nottsv> <!-- DEFAULT : &false; -->
+	 
+	 <!-- Adjust the position of text -->
+	 <_nottx> 0 </_nottx> <!-- DEFAULT : 0 -->
+	 <_notty> 0 </_notty> <!-- DEFAULT : 0 -->
+	 
+	 <!-- Set the font -->
+	 <_nottf> 2 </_nottf> <!-- DEFAULT : 2 -->
+	 
+	 <!-- Adjust the text -->
+	 <_nottr> 254 </_nottr> <!-- DEFAULT : 254 -->
+	 <_nottg> 244 </_nottg> <!-- DEFAULT : 244 -->
+	 <_nottb> 183 </_nottb> <!-- DEFAULT : 183 -->
+	 <_notta> 255 </_notta> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadows -->
+	 <_nottsr> 0 </_nottsr> <!-- DEFAULT : 0 -->
+	 <_nottsg> 0 </_nottsg> <!-- DEFAULT : 0 -->
+	 <_nottsb> 0 </_nottsb> <!-- DEFAULT : 0 -->
+	 <_nottsa> 255 </_nottsa> <!-- DEFAULT : 255 -->
+	 
+	 <!-- Adjust shadow offset -->
+	 <_notsox> 2 </_notsox> <!-- DEFAULT : 2 -->
+	 <_notsoy> 2 </_notsoy> <!-- DEFAULT : 2 -->
+	 
+</rect>

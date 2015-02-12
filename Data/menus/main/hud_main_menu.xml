@@ -1,0 +1,2178 @@
+<!-- hud_main_menu.xml -->
+<menu name="HUDMainMenu">
+	<class> &HUDMainMenu; </class>
+	<stackingtype> &does_not_stack; </stackingtype>
+	<alpha>	50 </alpha>
+	<locus> &true; </locus>
+	<depth> -50 </depth>
+	<x> 0 </x>
+	<y> 0 </y>
+	<menufade> 0.25 </menufade>
+	<user1> 2 </user1>
+	<user2> 1 </user2>
+	<user3> 1 </user3>	<!-- 1 = explore mode / 0 = menu mode -->
+	<user4> 1 </user4>	<!-- current mode... 1=stats, 2=inventory, 3=magic, 4=map -->
+	<user5> 1 </user5>	<!-- last mode... 1=stats, 2=inventory, 3=magic, 4=map -->
+	<user6> 65 </user6>	<!-- player model first zoom percentage... 100=face, 0=full body -->
+	
+	<!-- Region text -->
+	<user7> 0 </user7>	<!-- alpha -->
+	<user8> Region name text </user8>
+	
+	<rect name="player_grab_zone">
+		<id> 91 </id>
+		<target> &true; </target>
+		<alpha> 128 </alpha>
+		<x> 0 </x>
+		<y> 0 </y>
+		<width> <copy src="screen()" trait="width"/> </width>
+		<height> <copy src="screen()" trait="height"/> </height>
+	</rect>
+
+	<!-- SETTINGS ===========================================================================-->
+	
+	<!--
+		****************************************************************************************
+		* BEIDER COMMENT
+		*
+		* This is a settings section we made to make changing the looks and feel of the UI
+		* easier and faster. You may find the config file for the hud at this path,
+		* Oblivion\Data\menus\prefabs\ui_config\hudmainmenu_config.xml
+		*
+		* QUICKFIND : SETTINGS01
+		*
+		****************************************************************************************
+	-->
+		<include src="ui_config\hudmainmenu_config.xml"/>
+	
+	<rect name="magic_icons">
+		<id> 16 </id>
+		
+		<x> <copy src="Imp_UI_Settings" trait="_aex"/> </x>
+		<y> <copy src="Imp_UI_Settings" trait="_aey"/> </y>
+		
+		<_icon_width>	64 </_icon_width>
+		<_icon_height>	64 </_icon_height>
+		<_buffer>		<copy src="Imp_UI_Settings" trait="_aeis"/> </_buffer>
+		<_icons_per_row>	<copy src="Imp_UI_Settings" trait="_aeipr"/> </_icons_per_row>
+	</rect>
+	
+	<template name="icon_template">
+		<image name="effect_icon">
+			<locus> &true; </locus>
+			<user0></user0>		<!-- index -->
+			<user1></user1>		<!-- time left -->
+			<width>
+				<copy src="magic_icons" trait="_icon_width"/>
+				<div src="Imp_UI_Settings" trait="_aeaw"/>
+			</width>
+			<height>
+				<copy src="magic_icons" trait="_icon_height"/>
+				<div src="Imp_UI_Settings" trait="_aeah"/>
+			</height>
+			<zoom> <copy src="Imp_UI_Settings" trait="_aez"/> </zoom>
+			<x>
+				<copy src="magic_icons" trait="x"/>							<!-- starting x pos -->
+				<sub src="magic_icons" trait="_icon_width"/>				<!-- move left by width of one icon -->
+				<sub>
+					<copy src="magic_icons" trait="_icon_width"/>
+					<add src="magic_icons" trait="_buffer"/>				<!-- move left by icon width + buffer -->
+					<mult>													<!-- how many times = index % max-per-row -->
+						<copy src="me()" trait="user0"/>
+						<mod src="magic_icons" trait="_icons_per_row"/>
+					</mult>
+				</sub>
+			</x>
+			<y>
+				<copy src="magic_icons" trait="y"/>							<!-- starting y pos -->
+				<add>
+					<copy src="me()" trait="user0"/>						<!-- index/icons_per_row gives you -->
+					<div src="magic_icons" trait="_icons_per_row"/>			<!-- row num plus a fraction -->
+					<sub>
+						<copy src="me()" trait="user0"/>					<!-- subtract the fraction -->
+						<mod src="magic_icons" trait="_icons_per_row"/>
+						<div src="magic_icons" trait="_icons_per_row"/>
+					</sub>
+					<mult>													<!-- multiply row num by num pixels -->
+						<copy src="magic_icons" trait="_icon_height"/>
+						<add src="magic_icons" trait="_buffer"/>
+					</mult>
+				</add>
+			</y>
+			<nif name="icon_timer">
+				<id> 17 </id>
+				<depth> 1 </depth>
+				<filename> Enemy Health Bar\Health_Bar01.NIF </filename>
+				<visible>
+					<copy src="parent()" trait="alpha"/>
+					<eq> 255 </eq>
+					<and>
+						<copy src="parent()" trait="user1"/>	<!-- time left < 0 for constant effects -->
+						<gte>0</gte>
+					</and>
+					<and>
+						<copy src="Imp_UI_Settings" trait="_arctimer"/>
+						<eq>&true;</eq>
+					</and>
+				</visible>
+				<x> 23 </x>
+				<y> 0 </y>
+				<animation> Health_Bar </animation>
+			</nif>
+			<image name="effect_icon">
+				<depth> 2 </depth>
+				<filename> <copy src="parent()" trait="filename"/> </filename>
+				<width> <copy src="parent()" trait="width"/> </width>
+				<height> <copy src="parent()" trait="height"/> </height>
+				<zoom> <copy src="parent()" trait="zoom"/> </zoom>
+				<alpha> 128 </alpha>
+				<x> 0 </x>
+				<y> 0 </y>
+			</image>
+			<text name="temp_countdown">
+				<depth> 3 </depth>
+				<alpha>
+					<copy src="Imp_UI_Settings" trait="_aecta"/>
+					<onlyif>
+						<copy src="parent()" trait="user1"/>	<!-- time left < 0 for constant effects -->
+						<gte>0</gte>
+					</onlyif>
+				</alpha>
+				<red> <copy src="Imp_UI_Settings" trait="_aectr"/> </red>
+				<green> <copy src="Imp_UI_Settings" trait="_aectg"/> </green>
+				<blue> <copy src="Imp_UI_Settings" trait="_aectb"/> </blue>
+				<font> <copy src="Imp_UI_Settings" trait="_aectf"/> </font>
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub src="me()" trait="width"/>
+					<div>2</div>
+					<onlyif src="Imp_UI_Settings" trait="_aectxc"/>
+					<add src="Imp_UI_Settings" trait="_aectx"/>
+				</x>
+				<y> <add src="Imp_UI_Settings" trait="_aecty"/> </y>
+				<_integer>
+					<copy src="parent()" trait="user1"/>
+					<ceil> 0 </ceil>
+				</_integer>
+				<string>
+					<copy src="me()" trait="_integer"/>
+				</string>
+			</text>
+		</image>
+	</template>
+	
+	<text name="hudmain_region">
+		<x>
+			<copy src="hudmain_background" trait="x"/>
+			<add src="hudmain_statusbars" trait="x"/>
+		</x>
+		<y>
+			<copy src="hudmain_background" trait="y"/>
+			<sub src="me()" trait="height"/>
+		</y>
+		<string>
+			<copy src="HUDMainMenu" trait="user8"/>
+		</string>
+		<alpha>
+			<copy src="HUDMainMenu" trait="user7"/>
+		</alpha>
+		<font> 2 </font>
+		<red> 254 </red>
+		<green> 244 </green>
+		<blue> 183 </blue>
+	</text>
+	
+	<image name="hudmain_background">
+		<id> 1 </id>
+		<filename> <copy src="Imp_UI_Settings" trait="_hudback"/> </filename>
+		<depth> 55 </depth>
+		<alpha>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<sub> 1 </sub>
+			<mul> 255 </mul>
+		</alpha>
+		<width> 620 </width>
+		<height> 70 </height>
+		<locus> &true; </locus>
+		<x>
+			<copy src="screen()" trait="cropx"/>
+			<add src="screen()" trait="cropx"/>
+			<sub> 60 </sub>
+			<max src="screen()" trait="cropx"/>
+			<add> 67 </add>
+		</x>
+		<y>
+			<copy src="screen()" trait="height"/>
+			<sub src="screen()" trait="cropy"/>
+			<sub src="screen()" trait="cropy"/>
+			<sub src="me()" trait="height"/>
+		</y>
+		
+		
+		<image name="hudmain_frame">
+			<id> 8 </id>
+			<filename> <copy src="Imp_UI_Settings" trait="_hudframe"/> </filename>
+			<depth> 18 </depth>
+			<visible> <copy src="HUDMainMenu" trait="user3"/> </visible>
+			<width> 761 </width>
+			<height> 90 </height>
+			<x> -70 </x>
+			<y> -5 </y>
+			<user0> 135 </user0>
+			<locus> &true; </locus>
+			
+			<image name="hudmain_frame_left">
+				<depth> 1 </depth>
+				<visible> &xenon; </visible>
+				<filename> <copy src="Imp_UI_Settings" trait="_hudxboxlt"/> </filename>
+				<width> 42 </width>
+				<height> 35 </height>
+				<x> 22 </x>
+				<y> 26 </y>
+			</image>
+			
+			<image name="hudmain_frame_right">
+				<depth> 1 </depth>
+				<visible> &xenon; </visible>
+				<filename> <copy src="Imp_UI_Settings" trait="_hudxboxrt"/> </filename>
+				<width> 45 </width>
+				<height> 35 </height>
+				<x>
+					<copy src="parent()" trait="width"/>
+					<sub src="me()" trait="width"/>
+					<sub> 25 </sub>
+				</x>
+				<y> 26 </y>
+			</image>
+		</image>
+		
+		
+
+
+<!--------------------------------------------------------------------------------------
+										CLICK ZONES
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		These things are the click zones, I moved it out of the objects and put it
+		locked in place where the buttons are supposed to be. That way you can still
+		click in the same place even after moving the other stuff.
+	-->
+	<rect name="hudmain_bars_cover">
+		<ID> 9 </ID>
+		<depth> 5 </depth>
+		<target> &true; </target>
+		<alpha> 0 </alpha>
+		<width> 199 </width>
+		<height> 80 </height>
+		<x> 0 </x>
+		<y> 0 </y>
+	</rect>
+	
+	<rect name="hudmain_weapon_cover">
+		<id> 10 </id>
+		<target> &true; </target>
+		<depth> 5 </depth>
+		<alpha> 0 </alpha>
+		<width> 74 </width>
+		<height> 80 </height>
+		<x> 230 </x>
+		<y> 0 </y>
+	</rect>
+	
+	<rect name="hudmain_magic_cover">
+		<id> 11 </id>
+		<target> &true; </target>
+		<depth> 5 </depth>
+		<alpha> 0 </alpha>
+		<width> 74 </width>
+		<height> 80 </height>
+		<x> 320 </x>
+		<y> 0 </y>
+	</rect>
+	
+	<rect name="hudmain_compass_cover">
+		<id> 12 </id>
+		<target> &true; </target>
+		<depth> 25 </depth>
+		<alpha> 0 </alpha>
+		<red> 0 </red>
+		<width> 217 </width>
+		<height> 80 </height>
+		<x> 415 </x>
+		<y> 0 </y>
+	</rect>
+	
+<!--------------------------------------------------------------------------------------
+									GRAPHIC REPLACEMENTS
+----------------------------------------------------------------------------------------
+
+		BEIDER COMMENT
+			This is something i added so you can still have images in your menu even if
+			you move your original icons away.
+			
+			The most code here is in the visibility tag, it will only show if menu is open
+			and you enabled it from the config.
+	-->	
+	
+	<image name="hudmain_Magic_Icon_rep">
+		<id> 6 </id>
+		<filename> <copy src="hudmain_Magic_Icon" trait="filename"/> </filename>
+		<depth> 1 </depth>
+		<width> 63 </width>
+		<height> 63 </height>
+		<x> 324 </x>
+		<y> 5 </y>
+		<alpha> 255	</alpha>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_magiciconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+	</image>
+	
+	<image name="hudmain_Weapon_Icon_rep">
+		<id> 5 </id>
+		<filename> <copy src="hudmain_Weapon_Icon" trait="filename"/> </filename>
+		<depth> 1 </depth>
+		<width> 63 </width>
+		<height> 63 </height>
+		<x> 229	</x>
+		<y> 5 </y>
+		<alpha> 255	</alpha>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_wepiconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+	</image>
+	
+	<image name="hudmain_health_empty_rep">
+		<filename> <copy src="hudmain_health_empty" trait="filename"/> </filename>
+		<depth> 1 </depth>
+		<width> 189 </width>
+		<height> 16 </height>
+		<locus> &true; </locus>
+		<x> 0 </x>
+		<y> 12 </y>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_barsiconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+			
+		<image name="hudmain_health_full_rep">
+			<ID> 2 </ID>
+			<locus> &true; </locus>
+			<filename> <copy src="hudmain_health_full" trait="filename"/> </filename>
+			<depth> 1 </depth>
+			<visible> <copy src="parent()" trait="visible"/> </visible>
+			<width> 163 </width>
+			<height> 11 </height>
+			<x> 13 </x>
+			<y> 1 </y>
+		</image>
+	</image>
+	
+	<image name="hudmain_magic_empty_rep">
+		<filename> <copy src="hudmain_magic_empty" trait="filename"/> </filename>
+		<depth> 1 </depth>
+		<width> 189 </width>
+		<height> 16 </height>
+		<locus> &true; </locus>
+		<x> 0 </x>
+		<y> 30 </y>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_barsiconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+			
+		<image name="hudmain_magic_full_rep">
+			<ID> 2 </ID>
+			<locus> &true; </locus>
+			<filename> <copy src="hudmain_magic_full" trait="filename"/> </filename>
+			<depth> 1 </depth>
+			<visible> <copy src="parent()" trait="visible"/> </visible>
+			<width> 163 </width>
+			<height> 11 </height>
+			<x> 13 </x>
+			<y> 1 </y>
+		</image>
+	</image>
+	
+	<image name="hudmain_fatigue_empty_rep">
+		<filename> <copy src="hudmain_fatigue_empty" trait="filename"/> </filename>
+		<depth> 1 </depth>
+		<width> 189 </width>
+		<height> 16 </height>
+		<locus> &true; </locus>
+		<x> 0 </x>
+		<y> 48 </y>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_barsiconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+			
+		<image name="hudmain_fatigue_full_rep">
+			<ID> 2 </ID>
+			<locus> &true; </locus>
+			<filename> <copy src="hudmain_fatigue_full" trait="filename"/> </filename>
+			<depth> 1 </depth>
+			<visible> <copy src="parent()" trait="visible"/> </visible>
+			<width> 163 </width>
+			<height> 11 </height>
+			<x> 13 </x>
+			<y> 1 </y>
+		</image>
+	</image>
+		
+	<image name="hudmain_compass_heading_rep">
+		<id> 14 </id>
+		<filename> <copy src="hudmain_compass_heading" trait="filename"/></filename>
+		<depth> 3 </depth>
+		<width> 180 </width>
+		<height> 62 </height>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 0 </eq>
+			<and>
+				<copy src="Imp_UI_Settings" trait="_compiconr"/>
+				<eq> 2 </eq>
+			</and>
+		</visible>
+		<x> 435 </x>
+		<y> 3 </y>
+	</image>
+	
+<!--------------------------------------------------------------------------------------
+						ONSCREEN WARNINGS FOR LOW HP / MAGICA / FATIGUE
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		This is a new feature I implemented into the HUD. It allows you to have
+		warnings on your screen when you run low oh HP, MA, FA.
+-->
+	
+	<text name="health_low_hp_warning"> 
+		<depth> 3 </depth>
+		<justify> &center; </justify>
+		<font> <copy src="Imp_UI_Settings" trait="_hpwtextfont"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_hpwtextred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_hpwtextgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_hpwtextblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_hpwtextalpha"/> </alpha>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 1 </eq>
+			<and>
+				<copy src="hudmain_health_full" trait="width"/>
+				<div src="Imp_UI_Settings" trait="_hpbarmul"/>
+				<mul>100</mul>
+				<lte src="Imp_UI_Settings" trait="_hpwtextvisible"/>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="Imp_UI_Settings" trait="_hpwfronttext"/> </string>
+		<x>	<copy src="Imp_UI_Settings" trait="_hpwtextx"/> </x>
+		<y> <copy src="Imp_UI_Settings" trait="_hpwtexty"/> </y>
+		<clips> &false; </clips>
+	</text>
+	
+	<text name="health_low_hp_warning_ds"> 
+		<depth> 2 </depth>
+		<justify> &left; </justify>
+		<font> <copy src="health_low_hp_warning" trait="font"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_hpwtextsred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_hpwtextsgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_hpwtextsblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_hpwtextsalpha"/> </alpha>
+		<visible>
+			<copy src="Imp_UI_Settings" trait="_hpwtextsvisible"/>
+			<eq> &true; </eq>
+			<and>
+				<copy src="health_low_hp_warning" trait="visible"/>
+			<eq> &true; </eq>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="health_low_hp_warning" trait="string"/> </string>
+		<x>
+			<copy src="health_low_hp_warning" trait="x"/>
+			<add src="Imp_UI_Settings" trait="_hpwsoffsetx"/>
+		</x>
+		<y>
+			<copy src="health_low_hp_warning" trait="y"/>
+			<add src="Imp_UI_Settings" trait="_hpwsoffsety"/>
+		</y>
+		<clips> &false; </clips>				
+	</text>
+	
+	
+	<text name="magica_low_ma_warning"> 
+		<depth> 3 </depth>
+		<justify> &center; </justify>
+		<font> <copy src="Imp_UI_Settings" trait="_mawtextfont"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_mawtextred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_mawtextgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_mawtextblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_mawtextalpha"/> </alpha>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 1 </eq>
+			<and>
+				<copy src="hudmain_magic_full" trait="width"/>
+				<div src="Imp_UI_Settings" trait="_mabarmul"/>
+				<mul>100</mul>
+				<lte src="Imp_UI_Settings" trait="_mawtextvisible"/>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="Imp_UI_Settings" trait="_mawfronttext"/> </string>
+		<x>	<copy src="Imp_UI_Settings" trait="_mawtextx"/> </x>
+		<y> <copy src="Imp_UI_Settings" trait="_mawtexty"/> </y>
+		<clips> &false; </clips>
+	</text>
+	
+	<text name="magica_low_ma_warning_ds"> 
+		<depth> 2 </depth>
+		<justify> &left; </justify>
+		<font> <copy src="magica_low_ma_warning" trait="font"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_mawtextsred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_mawtextsgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_mawtextsblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_mawtextsalpha"/> </alpha>
+		<visible>
+			<copy src="Imp_UI_Settings" trait="_mawtextsvisible"/>
+			<eq> &true; </eq>
+			<and>
+				<copy src="magica_low_ma_warning" trait="visible"/>
+			<eq> &true; </eq>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="magica_low_ma_warning" trait="string"/> </string>
+		<x>
+			<copy src="magica_low_ma_warning" trait="x"/>
+			<add src="Imp_UI_Settings" trait="_mawsoffsetx"/>
+		</x>
+		<y>
+			<copy src="magica_low_ma_warning" trait="y"/>
+			<add src="Imp_UI_Settings" trait="_mawsoffsety"/>
+		</y>
+		<clips> &false; </clips>				
+	</text>
+	
+	
+<text name="fatigue_low_fa_warning"> 
+		<depth> 3 </depth>
+		<justify> &center; </justify>
+		<font> <copy src="Imp_UI_Settings" trait="_fawtextfont"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_fawtextred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_fawtextgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_fawtextblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_fawtextalpha"/> </alpha>
+		<visible>
+			<copy src="HUDMainMenu" trait="user3"/>
+			<eq> 1 </eq>
+			<and>
+				<copy src="hudmain_fatigue_full" trait="width"/>
+				<div src="Imp_UI_Settings" trait="_fabarmul"/>
+				<mul>100</mul>
+				<lte src="Imp_UI_Settings" trait="_fawtextvisible"/>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="Imp_UI_Settings" trait="_fawfronttext"/> </string>
+		<x>	<copy src="Imp_UI_Settings" trait="_fawtextx"/> </x>
+		<y> <copy src="Imp_UI_Settings" trait="_fawtexty"/> </y>
+		<clips> &false; </clips>
+	</text>
+	
+	<text name="magica_low_fa_warning_ds"> 
+		<depth> 2 </depth>
+		<justify> &left; </justify>
+		<font> <copy src="fatigue_low_fa_warning" trait="font"/> </font>
+		<red> <copy src="Imp_UI_Settings" trait="_fawtextsred"/> </red>
+		<green> <copy src="Imp_UI_Settings" trait="_fawtextsgreen"/> </green>
+		<blue> <copy src="Imp_UI_Settings" trait="_fawtextsblue"/> </blue>
+		<alpha> <copy src="Imp_UI_Settings" trait="_fawtextsalpha"/> </alpha>
+		<visible>
+			<copy src="Imp_UI_Settings" trait="_fawtextsvisible"/>
+			<eq> &true; </eq>
+			<and>
+				<copy src="fatigue_low_fa_warning" trait="visible"/>
+			<eq> &true; </eq>
+			</and>
+		</visible>
+		<wrapwidth> 600 </wrapwidth>
+		<wraplines> 1 </wraplines>
+		<string> <copy src="fatigue_low_fa_warning" trait="string"/> </string>
+		<x>
+			<copy src="fatigue_low_fa_warning" trait="x"/>
+			<add src="Imp_UI_Settings" trait="_fawsoffsetx"/>
+		</x>
+		<y>
+			<copy src="fatigue_low_fa_warning" trait="y"/>
+			<add src="Imp_UI_Settings" trait="_fawsoffsety"/>
+		</y>
+		<clips> &false; </clips>				
+	</text>
+					
+		
+<!--------------------------------------------------------------------------------------
+									HP / MAGICA / FATIGUE
+---------------------------------------------------------------------------------------->
+		
+
+		
+		<rect name="hudmain_statusbars">
+			<alpha> 0 </alpha>
+			<locus> &true; </locus>
+			<x> <copy src="Imp_UI_Settings" trait="_statusallx"/> </x>
+			<y> <copy src="Imp_UI_Settings" trait="_statusally"/> </y>
+
+<!--------------------------------------------------------------------------------------
+										HP BAR
+---------------------------------------------------------------------------------------->
+		
+			<image name="hudmain_health_empty">
+				<filename> <copy src="Imp_UI_Settings" trait="_hudribbonhpe"/> </filename>
+				<depth> 1 </depth>
+				<width> 189 </width>
+				<height> <copy src="Imp_UI_Settings" trait="_hpbarh"/> </height>
+				<locus> &true; </locus>
+				<x> <copy src="Imp_UI_Settings" trait="_hpbarx"/> </x>
+				<y> <copy src="Imp_UI_Settings" trait="_hpbary"/> </y>
+				<zoom> <copy src="Imp_UI_Settings" trait="_hpbarzoom"/> </zoom>
+				<alpha> <copy src="Imp_UI_Settings" trait="_hpbaremptyalpha"/> </alpha>
+					
+				<image name="hudmain_health_full">
+					<ID> 2 </ID>
+					<locus> &true; </locus>
+					<filename> <copy src="Imp_UI_Settings" trait="_hudribbonhpf"/> </filename>
+					<depth> 1 </depth>
+					<visible>
+						<copy src="me()" trait="user0"/>
+						<gt> 0 </gt>
+					</visible>
+					<width>
+						<copy src="me()" trait="user0"/>
+						<max> 0 </max>
+						<min> 1 </min>
+						<mul src="Imp_UI_Settings" trait="_hpbarmul"/>
+					</width>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hpbaralpha"/> </alpha>
+					<height> <copy src="Imp_UI_Settings" trait="_hpbarfullheight"/> </height>
+					<x> <copy src="Imp_UI_Settings" trait="_hpbarfullx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_hpbarfully"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_hpbarzoom"/> </zoom>
+					<user0> 1.0 </user0>
+				</image>
+				
+				<image name="hudmain_health_edge">
+					<filename> <copy src="Imp_UI_Settings" trait="_ribbonslider"/> </filename>
+					<visible> &true; </visible>
+					<depth> 2 </depth>
+					<width> 12 </width>
+					<height> 14 </height>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hpbaredgealpha"/> </alpha>
+					<x>
+						<copy src="hudmain_health_full" trait="x"/>
+						<add src="hudmain_health_full" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_hpbaredgex"/>
+					</x>
+					<y> <copy src="Imp_UI_Settings" trait="_hpbaredgey"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_hpbarzoom"/> </zoom>
+				</image>
+				
+<!--------------------------------------------------------------------------------------
+									Health Status Text
+---------------------------------------------------------------------------------------->
+
+				
+				<text name="health_text_front"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hptextfvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_hpfronttext"/> </string>
+					<x>	<copy src="Imp_UI_Settings" trait="_hptextx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_hptexty"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="health_text_front_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hptextfsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_hpfronttext"/> </string>
+					<x>
+						<copy src="health_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsetx"/>
+					</x>
+					<y>
+						<copy src="health_text_front" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="health_text"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hptextvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string>
+						<copy src="hudmain_health_full" trait="width"/>
+						<div src="Imp_UI_Settings" trait="_hpbarmul"/>
+						<mul>100</mul>
+					</string>
+					<x>
+						<copy src="health_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_hpfrontspace"/>
+					</x>
+					<y> <copy src="health_text_front" trait="y"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="health_text_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hptextsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string>
+						<copy src="hudmain_health_full" trait="width"/>
+						<div> 163 </div>
+						<mul>100</mul>
+					</string>
+					<x>
+						<copy src="health_text" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsetx"/>
+					</x>
+					<y>
+						<copy src="health_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+								
+				<text name="health_pect"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hppectvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_hppecttext"/> </string>
+					<x>
+						<copy src="health_text" trait="X"/>
+						<add src="health_text" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_hppectspace"/>
+					</x>
+					<y>
+						<copy src="health_text" trait="y"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="health_pect_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_hptextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_hptextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_hptextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_hptextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_hptextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_hppectsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_hppecttext"/> </string>
+					<x>
+						<copy src="health_pect" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsetx"/>
+					</x>
+					<y>
+						<copy src="health_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_hpsoffsety"/>
+					</y>
+					<clips> &false; </clips>
+				</text>
+			</image>
+			
+<!--------------------------------------------------------------------------------------
+										MAGICA BAR
+---------------------------------------------------------------------------------------->
+			
+			<image name="hudmain_magic_empty">
+				<filename> <copy src="Imp_UI_Settings" trait="_hudribbonmae"/> </filename>
+				<depth> 1 </depth>
+				<width> 189 </width>
+				<height> <copy src="Imp_UI_Settings" trait="_mabarh"/> </height>
+				<locus> &true; </locus>
+				<x> <copy src="Imp_UI_Settings" trait="_mabarx"/> </x>
+				<y> <copy src="Imp_UI_Settings" trait="_mabary"/> </y>
+				<zoom> <copy src="Imp_UI_Settings" trait="_mabarzoom"/> </zoom>
+				<alpha> <copy src="Imp_UI_Settings" trait="_mabaremptyalpha"/> </alpha>
+
+				<image name="hudmain_magic_full">
+					<ID> 3 </ID>
+					<filename> <copy src="Imp_UI_Settings" trait="_hudribbonmaf"/> </filename>
+					<visible>
+						<copy src="me()" trait="user0"/>
+						<gt> 0 </gt>
+					</visible>
+					<depth> 1 </depth>
+					<locus> &true; </locus>
+					<width>
+						<copy src="me()" trait="user0"/>
+						<max> 0 </max>
+						<min> 1 </min>
+						<mul src="Imp_UI_Settings" trait="_mabarmul"/>
+					</width>
+					<alpha> <copy src="Imp_UI_Settings" trait="_mabaralpha"/> </alpha>
+					<height> <copy src="Imp_UI_Settings" trait="_mabarfullheight"/> </height>
+					<x> <copy src="Imp_UI_Settings" trait="_mabarfullx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_mabarfully"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_mabarzoom"/> </zoom>
+					<user1> 1.0 </user1>
+				</image>
+				<image name="hudmain_magic_edge">
+					<filename> <copy src="Imp_UI_Settings" trait="_ribbonslider"/> </filename>
+					<visible> &true; </visible>
+					<depth> 2 </depth>
+					<width> 12 </width>
+					<height> 14 </height>
+					<alpha> <copy src="Imp_UI_Settings" trait="_mabaredgealpha"/> </alpha>
+					<x>
+						<copy src="hudmain_magic_full" trait="x"/>
+						<add src="hudmain_magic_full" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_mabaredgex"/>
+					</x>
+					<y> <copy src="Imp_UI_Settings" trait="_mabaredgey"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_mabarzoom"/> </zoom>
+				</image>
+
+<!--------------------------------------------------------------------------------------
+									Magica Status Text
+---------------------------------------------------------------------------------------->
+				
+				<text name="magica_text_front"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_matextfvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_mafronttext"/> </string>
+					<x> <copy src="Imp_UI_Settings" trait="_matextx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_matexty"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="magica_text_front_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_matextfsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_mafronttext"/> </string>
+					<x>
+						<copy src="magica_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_masoffsetx"/>
+					</x>
+					<y>
+						<copy src="magica_text_front" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_masoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="magica_text"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_matextvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string>
+						<copy src="hudmain_magic_full" trait="width"/>
+						<div src="Imp_UI_Settings" trait="_mabarmul"/>
+						<mul>100</mul>
+					</string>
+					<x>
+						<copy src="magica_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_mafrontspace"/>
+					</x>
+					<y> <copy src="magica_text_front" trait="y"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="magica_text_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_matextsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="magica_text" trait="string"/> </string>
+					<x>
+						<copy src="magica_text" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_masoffsetx"/>
+					</x>
+					<y>
+						<copy src="magica_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_masoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+								
+				<text name="magica_pect"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_mapectvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_mapecttext"/> </string>
+					<x>
+						<copy src="magica_text" trait="x"/>
+						<add src="magica_text" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_mapectspace"/>
+					</x>
+					<y>
+						<copy src="magica_text" trait="y"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="magica_pect_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_matextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_matextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_matextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_matextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_matextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_mapectsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_mapecttext"/> </string>
+					<x>
+						<copy src="magica_pect" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_masoffsetx"/>
+					</x>
+					<y>
+						<copy src="magica_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_masoffsety"/>
+					</y>
+					<clips> &false; </clips>
+				</text>
+			</image>
+			
+			
+<!--------------------------------------------------------------------------------------
+									FATIGUE BAR
+---------------------------------------------------------------------------------------->			
+			
+			<image name="hudmain_fatigue_empty">
+				<filename> <copy src="Imp_UI_Settings" trait="_hudribbonfae"/> </filename>
+				<depth> 1 </depth>
+				<width> 189 </width>
+				<height> <copy src="Imp_UI_Settings" trait="_fabarh"/> </height>
+				<locus> &true; </locus>
+				<x> <copy src="Imp_UI_Settings" trait="_fabarx"/> </x>
+				<y> <copy src="Imp_UI_Settings" trait="_fabary"/> </y>
+				<zoom> <copy src="Imp_UI_Settings" trait="_fabarzoom"/> </zoom>
+				<alpha> <copy src="Imp_UI_Settings" trait="_fabaremptyalpha"/> </alpha>
+					
+				<image name="hudmain_fatigue_full">
+					<ID> 4 </ID>
+					<filename> <copy src="Imp_UI_Settings" trait="_hudribbonfaf"/> </filename>
+					<visible>
+						<copy src="me()" trait="user0"/>
+						<gt> 0 </gt>
+					</visible>
+					<locus> &true; </locus>
+					<depth> 1 </depth>
+					<width>
+						<copy src="me()" trait="user0"/>
+						<max> 0 </max>
+						<min> 1 </min>
+						<mul src="Imp_UI_Settings" trait="_fabarmul"/>
+					</width>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fabaralpha"/> </alpha>
+					<height> <copy src="Imp_UI_Settings" trait="_fabarfullheight"/> </height>
+					<x> <copy src="Imp_UI_Settings" trait="_fabarfullx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_fabarfully"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_fabarzoom"/> </zoom>
+					<user0> 1.0 </user0>
+				</image>
+				<image name="hudmain_fatigue_edge">
+					<filename> <copy src="Imp_UI_Settings" trait="_ribbonslider"/> </filename>
+					<visible> &true; </visible>
+					<depth> 2 </depth>
+					<width> 12 </width>
+					<height> 14 </height>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fabaredgealpha"/> </alpha>
+					<x>
+						<copy src="hudmain_fatigue_full" trait="x"/>
+						<add src="hudmain_fatigue_full" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_fabaredgex"/>
+					</x>
+					<y> <copy src="Imp_UI_Settings" trait="_fabaredgey"/> </y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_fabarzoom"/> </zoom>
+				</image>
+				
+<!--------------------------------------------------------------------------------------
+								  Fatigue Status Text
+---------------------------------------------------------------------------------------->
+				
+				<text name="fatigue_text_front"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fatextfvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_fafronttext"/> </string>
+					<x> <copy src="Imp_UI_Settings" trait="_fatextx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_fatexty"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="fatigue_text_front_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fatextfsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="fatigue_text_front" trait="string"/> </string>
+					<x>
+						<copy src="fatigue_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsetx"/>
+					</x>
+					<y>
+						<copy src="fatigue_text_front" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="fatigue_text"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fatextvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string>
+						<copy src="hudmain_fatigue_full" trait="width"/>
+						<div src="Imp_UI_Settings" trait="_fabarmul"/>
+						<mul>100</mul>
+					</string>
+					<x>
+						<copy src="fatigue_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_fafrontspace"/>
+					</x>
+					<y> <copy src="fatigue_text_front" trait="y"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="fatigue_text_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fatextsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string>
+						<copy src="hudmain_fatigue_full" trait="width"/>
+						<div src="Imp_UI_Settings" trait="_fabarmul"/>
+						<mul>100</mul>
+					</string>
+					<x>
+						<copy src="fatigue_text" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsetx"/>
+					</x>
+					<y>
+						<copy src="fatigue_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+								
+				<text name="fatigue_pect"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fapectvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_fapecttext"/> </string>
+					<x>
+						<copy src="fatigue_text" trait="x"/>
+						<add src="fatigue_text" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_fapectspace"/>
+					</x>
+					<y>
+						<copy src="fatigue_text" trait="y"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="fatigue_pect_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_fatextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_fatextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_fatextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_fatextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_fatextsalpha"/> </alpha>
+					<visible>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+						<and>
+							<copy src="Imp_UI_Settings" trait="_fapectsvisible"/>
+							<eq> 2 </eq>
+						</and>
+					</visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="fatigue_pect" trait="string"/> </string>
+					<x>
+						<copy src="fatigue_pect" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsetx"/>
+					</x>
+					<y>
+						<copy src="fatigue_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_fasoffsety"/>
+					</y>
+					<clips> &false; </clips>
+				</text>
+				
+			</image>			
+		</rect>
+		
+<!--------------------------------------------------------------------------------------
+								  	  Weapon Icon
+---------------------------------------------------------------------------------------->
+		
+		<image name="hudmain_Weapon_Icon">
+			<id> 5 </id>
+			<filename> <copy src="Imp_UI_Settings" trait="_ihdw"/> </filename>
+			<locus> &true; </locus>
+			<depth> 1 </depth>
+			<width> <copy src="Imp_UI_Settings" trait="_wepwidth"/> </width>
+			<height> <copy src="Imp_UI_Settings" trait="_wepheight"/> </height>
+			<zoom> <copy src="Imp_UI_Settings" trait="_wepzoom"/> </zoom>
+			<x> <copy src="Imp_UI_Settings" trait="_wepx"/>	</x>
+			<y> <copy src="Imp_UI_Settings" trait="_wepy"/> </y>
+			<visible>
+				<copy src="HUDMainMenu" trait="user3"/>
+				<eq> 1 </eq>
+				<and>
+					<copy src="Imp_UI_Settings" trait="_wepiconr"/>
+					<eq> 2 </eq>
+				</and>
+				<or>
+					<copy src="Imp_UI_Settings" trait="_wepiconr"/>
+					<eq> 1 </eq>
+				</or>
+			</visible>
+			<alpha>
+				<copy src="Imp_UI_Settings" trait="_wepalpha1"/>
+					<onlyif>
+						<copy src="me()" trait="user2"/>
+						<gte> <copy src="Imp_UI_Settings" trait="_wepalphapre"/> </gte>	<!-- weapon health minimum before weapon icon partially alphas out -->
+					</onlyif>
+				<add src="Imp_UI_Settings" trait="_wepalpha2"/>
+			</alpha>
+			<!-- Possible item statuses are broken, stolen, enchanted, and poisoned -->
+			<user0> 0 </user0>		<!-- status combination -->
+			<user1></user1>			<!-- status icon filename -->
+			<user2> 1.0 </user2>	<!-- weapon health - 0-100 -->
+			<user3> 0 </user3>		<!-- ammo remaining -->
+			
+			<image name="hudmain_weapon_status">
+				<filename> <copy src="parent()" trait="user1"/> </filename>
+				<depth> 1 </depth>
+				<visible>
+					<copy src="parent()" trait="user0"/>
+					<gt> 0 </gt>
+				</visible>
+				<x> <copy src="Imp_UI_Settings" trait="_wepstatusoffx"/> </x>
+				<y>
+					<copy src="parent()" trait="y"/>
+					<add src="parent()" trait="height"/>
+					<sub src="me()" trait="height"/>
+					<add src="Imp_UI_Settings" trait="_wepstatusoffy"/>
+				</y>
+				<zoom> <copy src="Imp_UI_Settings" trait="_wepstatuszoom"/> </zoom>
+				<height>
+					<copy><copy src="Imp_UI_Settings" trait="_wepstatush1"/></copy>		<onlyif src="me()" trait="_handonly"/>
+					<add>
+						<copy><copy src="Imp_UI_Settings" trait="_wepstatush2"/></copy>	<onlyifnot src="me()" trait="_handonly"/>
+					</add>
+				</height>
+				<width>
+					<copy src="Imp_UI_Settings" trait="_wepstatusw1"/>
+					<sub>
+						<copy src="Imp_UI_Settings" trait="_wepstatusw2"/>
+						<onlyif>
+							<!-- If any of these conditions is true, we are using an original icon,
+							     rather than a "combo" dds. -->
+							<!-- "Combo" dds's are 32x64, original icons are 32x32 -->
+							<copy src="me()" trait="_handonly"/>
+							<or> <copy src="parent()" trait="user0"/> <eq>2</eq> </or>
+							<or> <copy src="parent()" trait="user0"/> <eq>4</eq> </or>
+							<or> <copy src="parent()" trait="user0"/> <eq>8</eq> </or>
+						</onlyif>
+					</sub>
+				</width>
+				<red>
+					<copy> 47 </copy>
+					<onlyifnot src="me()" trait="_handonly"/>
+					<add> 208 </add>
+				</red>
+				<green>
+					<copy> 255 </copy>
+					<onlyifnot src="me()" trait="_handonly"/>
+				</green>
+				<blue>
+					<copy> 255 </copy>
+					<onlyifnot src="me()" trait="_handonly"/>
+				</blue>
+				<alpha> <copy src="Imp_UI_Settings" trait="_wepstatusalpha"/> </alpha>
+				<_handonly>
+					<copy src="parent()" trait="user0"/>
+					<eq> 1 </eq>
+				<_handonly>
+			</image>
+			
+			<text name="hudmain_weapon_ammo">
+				<visible>
+					<copy src="parent()" trait="user3"/>
+					<gt> 0 </gt>
+					<and>
+						<copy src="HUDMainMenu" trait="user3"/>
+						<eq> 1 </eq>
+					</and>
+				</visible>
+				<x> <copy src="Imp_UI_Settings" trait="_waox"/> </x>
+				<y> <copy src="Imp_UI_Settings" trait="_waoy"/> </y>
+				<depth> 3 </depth>
+				<justify> &right; </justify>
+				<font> <copy src="Imp_UI_Settings" trait="_waf"/> </font>
+				<red> <copy src="Imp_UI_Settings" trait="_war"/> </red>
+				<green> <copy src="Imp_UI_Settings" trait="_wag"/> </green>
+				<blue> <copy src="Imp_UI_Settings" trait="_wab"/> </blue>
+				<alpha> <copy src="Imp_UI_Settings" trait="_waa"/> </alpha>
+				<wrapwidth> 55 </wrapwidth>
+				<wraplines> 1 </wraplines>
+				<string> <copy src="parent()" trait="user3" /> </string>
+			</text>
+			
+			<text name="hudmain_weapon_ammo_shadow">
+				<visible> <copy src="hudmain_weapon_ammo" trait="visible"/> </visible>
+				<x>
+					<copy src="hudmain_weapon_ammo" trait="x"/>
+					<add src="Imp_UI_Settings" trait="_wasox"/>
+				</x>
+				<y>
+					<copy src="hudmain_weapon_ammo" trait="y"/>
+					<add src="Imp_UI_Settings" trait="_wasoy"/>
+				</y>
+				<depth> 2 </depth>
+				<justify> &right; </justify>
+				<font> <copy src="hudmain_weapon_ammo" trait="font"/> </font>
+				<red> <copy src="Imp_UI_Settings" trait="_wasr"/> </red>
+				<green> <copy src="Imp_UI_Settings" trait="_wasg"/> </green>
+				<blue> <copy src="Imp_UI_Settings" trait="_wasb"/>  </blue>
+				<alpha> <copy src="Imp_UI_Settings" trait="_wasa"/> </alpha>
+				<wrapwidth> 55 </wrapwidth>
+				<wraplines> 1 </wraplines>
+				<string> <copy src="parent()" trait="user3" /> </string>
+			</text>
+			
+<!--------------------------------------------------------------------------------------
+									DURABILITY BAR
+----------------------------------------------------------------------------------------
+
+	BEIDER COMMENT
+		This is a completely new feature I added to the HUD. The code for the durability
+		text was already here but I decided to make a bar as well.
+	-->
+		
+			<image name="hudmain_durability_empty">
+				<filename> <copy src="Imp_UI_Settings" trait="_huddurabilitye"/> </filename>
+				<depth> -11 </depth>
+				<width> 189 </width>
+				<height> <copy src="Imp_UI_Settings" trait="_durbarh"/> </height>
+				<x> <copy src="Imp_UI_Settings" trait="_durbarx"/> </x>
+				<y> <copy src="Imp_UI_Settings" trait="_durbary"/> </y>
+				<zoom> <copy src="Imp_UI_Settings" trait="_durbarzoom"/> </zoom>
+				<alpha> <copy src="Imp_UI_Settings" trait="_durbaremptyalpha"/> </alpha>
+					
+				<image name="hudmain_durability_full">
+					<filename> <copy src="Imp_UI_Settings" trait="_huddurabilityf"/> </filename>
+					<depth> -01 </depth>
+					<locus> &true; </locus>
+					<visible> &true; </visible>
+					<red> <copy src="Imp_UI_Settings" trait="_durbarr"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durbarg"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durbarb"/> </blue>
+					<width>
+						<copy src="hudmain_Weapon_Icon" trait="user2"/>
+						<mul src="Imp_UI_Settings" trait="_durbarmul"/>
+						<div> 100 </div>
+					</width>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durbaralpha"/> </alpha>
+					<height> <copy src="Imp_UI_Settings" trait="_durbarfullheight"/> </height>
+					<x>
+						<copy src="hudmain_durability_empty" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_durbarfullx"/>
+					</x>
+					<y>
+						<copy src="hudmain_durability_empty" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_durbarfully"/>
+					</y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_durbarzoom"/> </zoom>
+					<user0> 1.0 </user0>
+				</image>
+				
+				<image name="hudmain_durability_edge">
+					<filename> <copy src="Imp_UI_Settings" trait="_ribbonslider"/> </filename>
+					<visible> &true; </visible>
+					<depth> -9 </depth>
+					<width> 12 </width>
+					<height> 14 </height>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durbaredgealpha"/> </alpha>
+					<x>
+						<copy src="hudmain_durability_full" trait="x"/>
+						<add src="hudmain_durability_full" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_durbaredgex"/>
+					</x>
+					<y>
+						<copy src="hudmain_durability_full" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_durbaredgey"/>
+					</y>
+					<zoom> <copy src="Imp_UI_Settings" trait="_durbarzoom"/> </zoom>
+				</image>
+				
+<!--------------------------------------------------------------------------------------
+									Durability Text
+---------------------------------------------------------------------------------------->
+
+			
+				<text name="durability_text_front"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durtextfvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_durfronttext"/> </string>
+					<x>	<copy src="Imp_UI_Settings" trait="_durtextx"/> </x>
+					<y> <copy src="Imp_UI_Settings" trait="_durtexty"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="durability_text_front_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextsalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durtextfsvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_durfronttext"/> </string>
+					<x>
+						<copy src="durability_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsetx"/>
+					</x>
+					<y>
+						<copy src="durability_text_front" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="durability_text"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durtextvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="hudmain_Weapon_Icon" trait="user2"/> </string>
+					<x>
+						<copy src="durability_text_front" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_durfrontspace"/>
+					</x>
+					<y> <copy src="durability_text_front" trait="y"/> </y>
+					<clips> &false; </clips>
+				</text>
+				
+				<text name="durability_text_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextsalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durtextsvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="hudmain_Weapon_Icon" trait="user2"/> </string>
+					<x>
+						<copy src="durability_text" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsetx"/>
+					</x>
+					<y>
+						<copy src="durability_text" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsety"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+								
+				<text name="durability_pect"> 
+					<depth> 4 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durpectvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_durpecttext"/> </string>
+					<x>
+						<copy src="durability_text" trait="X"/>
+						<add src="durability_text" trait="width"/>
+						<add src="Imp_UI_Settings" trait="_durpectspace"/>
+					</x>
+					<y>
+						<copy src="durability_text" trait="y"/>
+					</y>
+					<clips> &false; </clips>				
+				</text>
+				
+				<text name="durability_pect_ds"> 
+					<depth> 3 </depth>
+					<justify> &left; </justify>
+					<font> <copy src="Imp_UI_Settings" trait="_durtextfont"/> </font>
+					<red> <copy src="Imp_UI_Settings" trait="_durtextsred"/> </red>
+					<green> <copy src="Imp_UI_Settings" trait="_durtextsgreen"/> </green>
+					<blue> <copy src="Imp_UI_Settings" trait="_durtextsblue"/> </blue>
+					<alpha> <copy src="Imp_UI_Settings" trait="_durtextsalpha"/> </alpha>
+					<visible> <copy src="Imp_UI_Settings" trait="_durpectsvisible"/> </visible>
+					<wrapwidth> 600 </wrapwidth>
+					<wraplines> 1 </wraplines>
+					<string> <copy src="Imp_UI_Settings" trait="_durpecttext"/> </string>
+					<x>
+						<copy src="durability_pect" trait="x"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsetx"/>
+					</x>
+					<y>
+						<copy src="durability_pect" trait="y"/>
+						<add src="Imp_UI_Settings" trait="_dursoffsety"/>
+					</y>
+					<clips> &false; </clips>
+				</text>
+			</image>
+		</image>
+<!--------------------------------------------------------------------------------------
+								  	  Magic Icon
+---------------------------------------------------------------------------------------->		
+		
+		<image name="hudmain_Magic_Icon">
+			<id> 6 </id>
+			<filename> <copy src="Imp_UI_Settings" trait="_ihdm"/> </filename>
+			<repeatvertical> &true; </repeatvertical>
+			<depth> 1 </depth>
+			<locus> &true; </locus>
+			<visible>
+				<copy src="HUDMainMenu" trait="user3"/>
+				<eq> 1 </eq>
+				<and>
+					<copy src="Imp_UI_Settings" trait="_magiciconr"/>
+					<eq> 2 </eq>
+				</and>
+				<or>
+					<copy src="Imp_UI_Settings" trait="_magiciconr"/>
+					<eq> 1 </eq>
+				</or>
+			</visible>
+			<width> <copy src="Imp_UI_Settings" trait="_miw"/> </width>
+			<height> <copy src="Imp_UI_Settings" trait="_mih"/> </height>
+			<x> <copy src="Imp_UI_Settings" trait="_mix"/> </x>
+			<y> <copy src="Imp_UI_Settings" trait="_miy"/> </y>
+			<zoom> <copy src="Imp_UI_Settings" trait="_miz"/> </zoom>
+			<alpha>
+				<copy> <copy src="Imp_UI_Settings" trait="_mia1"/> </copy>
+				<onlyif src="me()" trait="user2"/>
+				<add> <copy src="Imp_UI_Settings" trait="_mia2"/> </add>
+			</alpha>
+			<user2> &true; </user2>		<!-- can cast -->
+		</image>
+		
+<!--------------------------------------------------------------------------------------
+								  	  Compass
+---------------------------------------------------------------------------------------->
+		<rect name="hudmain_compass_layout">
+			<width> 213 </width>
+			<height> 87 </height>
+			<x> <copy src="Imp_UI_Settings" trait="_cx"/> </x>
+			<y> <copy src="Imp_UI_Settings" trait="_cy"/> </y>
+			<visible>
+				<copy src="HUDMainMenu" trait="user3"/>
+				<eq> 1 </eq>
+				<and>
+					<copy src="Imp_UI_Settings" trait="_compiconr"/>
+					<eq> 2 </eq>
+				</and>
+				<and>
+					<copy src="Imp_UI_Settings" trait="_cv"/>
+					<eq> 2 </eq>
+				</and>
+				<or>
+					<copy src="Imp_UI_Settings" trait="_compiconr"/>
+					<eq> 1 </eq>
+					<and>
+						<copy src="Imp_UI_Settings" trait="_cv"/>
+						<eq> 2 </eq>
+					</and>
+				</or>
+			</visible>
+			<locus> &true; </locus>
+			
+			<image name="hudmain_compass_frame">
+				<filename> <copy src="Imp_UI_Settings" trait="_hcf"/> </filename>
+				<depth>
+					<copy src="hudmain_compass_heading" trait="user1"/>
+					<add> 5 </add>
+				</depth>
+				<width> 220 </width>
+				<height> 84 </height>
+				<alpha>
+					<copy src="HUDMainMenu" trait="user3"/>
+					<eq> 1 </eq>
+					<sub> 1 </sub>
+					<mul> 255 </mul>
+				</alpha>
+				<x> -14 </x>
+				<y> -10 </y>
+			</image>
+			
+			<image name="hudmain_compass_back">
+				<filename> <copy src="Imp_UI_Settings" trait="_hudback"/> </filename>
+				<depth> 0 </depth>
+				<width> 200 </width>
+				<height> 68 </height>
+				<alpha> 70 </alpha> <!-- 35% -->
+				<x> -5 </x>
+				<y> -2 </y>
+			</image>
+				
+			
+<text name="test_string1"> <!-- Control POI Icons -->
+	<depth> 3 </depth>
+	<justify> &left; </justify>
+	<font> 3 </font>
+	<red> 117 </red>
+	<green> 59 </green>
+	<blue> 33  </blue>
+	<alpha> 255 </alpha>
+	<wrapwidth> 600 </wrapwidth>
+	<wraplines> 1 </wraplines>
+	<string>
+		<copy>1</copy>
+		<onlyif>
+			<copy src="hudmain_compass_heading" trait="user2"/>
+			<eq>1800</eq>
+			<or>
+			<copy src="hudmain_compass_heading" trait="user2"/>
+			<eq>1803</eq>
+			</or>
+		</onlyif>
+		<add>1</add>
+		<copy src="test_string1" trait="_string_"/>
+	</string>
+	<x> 500 </x>
+	<y>
+		0
+	</y>
+	<clips> &false; </clips>
+	<visible>1</visible>
+	
+<_string_1>
+	NoLoad
+</_string_1>
+
+<_string_2>
+	<copy src="Imp_UI_Settings" trait="_mia"/>
+</_string_2>
+
+<_filename_1>
+	<copy src="test_string1" trait="string"/>
+</_filename_1>
+</text>
+
+<text name="test_string2"> <!-- Control Quest Marker -->
+	<depth> 3 </depth>
+	<justify> &left; </justify>
+	<font> 3 </font>
+	<red> 117 </red>
+	<green> 59 </green>
+	<blue> 33  </blue>
+	<alpha> 255 </alpha>
+	<wrapwidth> 600 </wrapwidth>
+	<wraplines> 1 </wraplines>
+	<string>
+		<copy>1</copy>
+		<onlyif>
+			<copy src="hudmain_compass_heading" trait="user2"/>
+			<eq>1800</eq>
+			<or>
+			<copy src="hudmain_compass_heading" trait="user2"/>
+			<eq>1802</eq>
+			</or>
+		</onlyif>
+		<add>1</add>
+		<copy src="test_string2" trait="_string_"/>
+	</string>
+	<x> 500 </x>
+	<y>
+		50
+	</y>
+	<clips> &false; </clips>
+	<visible>1</visible>
+	
+<_string_1>
+	NoLoad
+</_string_1>
+
+<_string_2>
+	<copy src="Imp_UI_Settings" trait="_hcg"/>
+</_string_2>
+	
+<_filename_2>
+	<copy src="test_string2" trait="string"/>
+</_filename_2>
+	
+	
+</text>
+			
+			<rect name="hudmain_compass_window">
+				<id> 7 </id>
+				<alpha> 0 </alpha>
+				<depth> 1 </depth>
+				<locus> &true; </locus>
+				<width> 200 </width>
+				<height> 87 </height>
+				<locus> &true; </locus>
+				<x> 0 </x>
+				<y> 0 </y>
+				<clipwindow> &true; </clipwindow>
+				<user0> 0 </user0>		<!-- set by code - heading in degrees, N is 0/360 -->
+				<user3>					<!-- conversion of degrees to pixels -->
+					<copy> 768 </copy>
+					<div> 360 </div>
+				</user3>
+				<user4>					<!-- heading in pixels -->
+					<copy src="me()" trait="user0"/>	<!-- heading in degrees -->
+					<mul src="me()" trait="user3"/>		<!-- convert to pixels -->
+				</user4>
+				<user5>					<!-- offset heading in pixels -->
+					<copy src="me()" trait="user4"/>	<!-- heading in pixels -->
+					<add> 768 </add>
+				</user5>
+			
+				<image name="hudmain_compass_heading">
+					<id> 14 </id>
+					<filename> <copy src="Imp_UI_Settings" trait="_hcfa"/> </filename>
+					<depth> 3 </depth>
+					<width> 2048 </width>
+					<height> 62 </height>
+					<clips> &true; </clips>
+					<locus> &true; </locus>
+					<visible>&true;</visible>
+					<x>
+						<copy src="parent()" trait="user5"/>	<!-- heading in pixels -->
+						<sub>
+							<copy src="parent()" trait="width"/>
+							<div> 2 </div>
+						</sub>
+						<mul> -1 </mul>
+					</x>
+					<y> 1 </y>
+					<user1> 0 </user1>	<!-- max icon depth -->
+					<user2> 0 </user2>	<!-- set by code - min reveal distance -->
+					<user3> 0 </user3>	<!-- set by code - max visible distance -->
+					
+
+					
+					
+					
+					<_filename_1>
+						<copy src="test_string1" trait="_filename_1"/>
+					</_filename_1>
+					<_filename_2>
+						<copy src="test_string2" trait="_filename_2"/>
+					</_filename_2>
+					
+					<_filename_3> <copy src="Imp_UI_Settings" trait="_hcg"/> </_filename_3>			<!-- marker icon -->
+					<_filename_4> <copy src="Imp_UI_Settings" trait="_wmai"/> </_filename_4>		<!-- you are here icon -->
+				
+					<!-- quest marker icon -->
+					<!-- <_filename_1> <copy src="Imp_UI_Settings" trait="_mia"/> </_filename_1>			
+					<!-- <_filename_2> <copy src="Imp_UI_Settings" trait="_hcg"/> </_filename_2> -->
+					
+				
+					<template name="hudmain_compass_icon">
+						<image name="hudmain_compass_icon">
+							<filename>
+								<copy src="me()" trait="user6"/>
+								<onlyif>
+									<copy src="me()" trait="user5"/>
+									<eq> 99 </eq>
+								</onlyif>
+								<add>
+									<copy> 3 </copy>
+									<onlyif>
+										<copy src="me()" trait="user5"/>
+										<eq> 98 </eq>
+									</onlyif>
+								</add>
+								<add> 1 </add>
+								<copy src="parent()" trait="_filename_"/>
+							</filename>
+							
+							<cropx>
+								<copy src="me()" trait="user5"/>
+								<sub> 1 </sub>
+								<mul> 32 </mul>
+								<onlyif>
+									<copy src="me()" trait="user5"/>
+									<lt> 90 </lt>
+								</onlyif>
+							</cropx>
+							<cropy>
+								<copy src="me()" trait="user6"/>
+								<sub> 1 </sub>
+								<mul> 32 </mul>
+								<onlyif>
+									<copy src="me()" trait="user5"/>
+									<lt> 90 </lt>
+								</onlyif>
+							</cropy>
+							<depth> 1 </depth>
+							<alpha>
+								<copy> 255 </copy>
+								<mul src="me()" trait="_distance"/>
+								<onlyif src="me()" trait="user9"/>
+								<add>
+									<copy> 255 </copy>
+									<onlyifnot src="me()" trait="user9"/>
+								</add>
+							</alpha>
+							<clips> &true; </clips>
+							<width>
+								<copy> 28 </copy>
+								<add>
+									<copy> 4 </copy>
+									<onlyif src="me()" trait="user9"/>
+								</add>
+							</width>
+							<height>
+								<copy> 32 </copy>
+								<add>
+									<copy> 10 </copy>
+									<onlyifnot src="me()" trait="user9"/>
+								</add>
+							</height>
+							<red>
+								<copy> 0 </copy>
+								<add>
+									<add> 255 </add> 
+									<onlyif src="me()" trait="user11"/>
+									<onlyif src="me()" trait="user10"/>
+								</add>
+								<add>
+									<add> 255 </add>
+									<onlyifnot src="me()" trait="user11"/>
+									<onlyifnot src="me()" trait="user12"/>
+								</add>
+							</red>
+							<green>
+								<copy> 0 </copy>
+								<add>
+									<add> 255 </add> 
+									<onlyif src="me()" trait="user11"/>
+									<onlyifnot src="me()" trait="user10"/>
+								</add>
+								<add>
+									<add> 255 </add>
+									<onlyifnot src="me()" trait="user11"/>
+									<onlyifnot src="me()" trait="user12"/>
+								</add>
+							</green>
+							<blue>
+								<copy> 0 </copy>
+								<add>
+									<add> 255 </add>
+									<onlyifnot src="me()" trait="user11"/>
+								</add>
+							</blue>
+							<y>
+								<copy> 1 </copy>
+								<onlyifnot src="me()" trait="user9"/>
+							</y>
+							<x>
+								<copy src="me()" trait="_pos_raw"/>
+								<add>
+									<copy> 768 </copy>
+									<onlyif>
+										<copy src="me()" trait="_pos_raw"/>
+										<sub src="hudmain_compass_window" trait="user5"/>
+										<lt> -384 </lt>
+									</onlyif>
+								</add>
+								<add>
+									<copy> 768 </copy>
+									<onlyif>
+										<copy src="me()" trait="_pos_raw"/>
+										<sub src="hudmain_compass_window" trait="user5"/>
+										<lt> -1152 </lt>
+									</onlyif>
+								</add>
+								<min>
+									<copy src="hudmain_compass_window" trait="width"/>
+									<sub src="parent()" trait="x"/>
+									<sub> 6 </sub>
+									<add src="me()" trait="_icon_offset"/>
+								</min>
+								<max>
+									<copy> 4 </copy>
+									<sub src="parent()" trait="x"/>
+									<sub src="me()" trait="_icon_offset"/>
+								</max>
+								<sub>
+									<copy src="me()" trait="width"/>
+									<div> 2 </div>
+								</sub>
+							</x>
+							<_icon_offset>
+								<copy> 2000 </copy>
+								<onlyif>
+									<copy src="me()" trait="user5"/>
+									<lt> 90 </lt>
+								</onlyif>
+							</_icon_offset>
+							<_pos_raw>
+								<copy> 768 </copy>
+								<div> 360 </div>
+								<mul src="me()" trait="user0"/>
+							</_pos_raw>
+							<_distance>
+								<copy> 1 </copy>
+								<sub>
+									<copy src="me()" trait="user1"/>
+									<sub src="parent()" trait="user2"/>		<!-- min reveal distance -->
+									<div src="parent()" trait="user3"/>		<!-- max visible distance -->
+									<min> 1.0 </min>
+								</sub>
+							</_distance>
+							<user0> 0 </user0>			<!-- heading to icon (0-360) -->
+							<user1> 30 </user1>			<!-- distance to icon in feet -->
+							<user2> &true; </user2>		<!-- unused if true -->
+							<user5> 0 </user5>			<!-- location type -->
+							<user6> &false; </user6>		<!-- fast travel enabled -->
+							<user9> &true; </user9>
+							<user10> &false; </user10>	<!-- is through load door -->
+							<user11> &false; </user11>  <!-- is a quest target -->
+							<user12> &false; </user12>  <!-- is the player marker -->
+						</image>
+					</template>
+				</image>
+			</rect>
+		</rect>
+		
+		<image name="hudmain_Levelup_Icon">
+			<id> 18 </id>
+			<filename> <copy src="Imp_UI_Settings" trait="_ilu"/> </filename>
+			<depth> -10 </depth>
+			<locus> &true; </locus>
+			<width> <copy src="Imp_UI_Settings" trait="_liw"/> </width>
+			<height> <copy src="Imp_UI_Settings" trait="_lih"/> </height>
+			<zoom> <copy src="Imp_UI_Settings" trait="_liz"/> </zoom>
+			<visible> &false; </visible>
+			<alpha> <copy src="Imp_UI_Settings" trait="_lia"/> </alpha>
+			<x> <copy src="Imp_UI_Settings" trait="_lix"/> </x>
+			<y> <copy src="Imp_UI_Settings" trait="_liy"/> </y>
+		</image>
+		
+		<nif name="hudmain_brackets">
+			<id> 20 </id>
+			<filename> hud_brackets\A_B_C_D_seq.NIF </filename>
+			<depth> 37 </depth>
+			<locus> &true; </locus>
+			<alpha> 255 </alpha>
+			<x> -20 </x>
+			<y> -12 </y>
+			<user1> 1 </user1>
+			<user2>-1.0</user2>
+			<visible>
+				<copy src="HUDMainMenu" trait="user3"/>
+				<eq> 0 </eq>
+			</visible>
+			<animation>
+				<copy src="HUDMainMenu" trait="user5"/>		<!-- get the last mode -->
+				<mult> 10 </mult>						<!-- make it the tens digit -->
+				<add src="HUDMainMenu" trait="user4"/>			<!-- make the current mode the ones digit -->
+				<copy src="me()" trait="_animation_"/>	<!-- use animation trait that ends in that number -->
+			</animation>
+			<_animation_12> A_B </_animation_12>
+			<_animation_13> A_C </_animation_13>
+			<_animation_14> A_D </_animation_14>
+			<_animation_21> B_A </_animation_21>
+			<_animation_23> B_C </_animation_23>
+			<_animation_24> B_D </_animation_24>
+			<_animation_31> C_A </_animation_31>
+			<_animation_32> C_B </_animation_32>
+			<_animation_34> C_D </_animation_34>
+			<_animation_41> D_A </_animation_41>
+			<_animation_42> D_B </_animation_42>
+			<_animation_43> D_C </_animation_43>
+		</nif>
+		
+		
+		
+	</image>
+</menu>

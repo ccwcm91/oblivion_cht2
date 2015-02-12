@@ -1,0 +1,170 @@
+<!-- hud_subtitle_menu.xml -->
+<menu name="HUDSubtitleMenu">
+	<class> &HUDSubtitleMenu; </class>
+	<stackingtype> &does_not_stack; </stackingtype>
+	<visible> &false; </visible>
+	<alpha>	0 </alpha>
+	<locus> &true; </locus>
+	<depth> 0 </depth>
+	<x> 0 </x>
+	<y> 0 </y>
+	<menufade> 0.15 </menufade>
+	
+	<!-- SETTINGS ===========================================================================-->
+	
+	<!--
+		****************************************************************************************
+		* BEIDER COMMENT
+		*
+		* This is a settings section we made to make changing the looks and feel of the UI
+		* easier and faster. You may find the config file this path,
+		* Oblivion\Data\menus\prefabs\ui_config\hudsubtitlemenu_config.xml
+		*
+		* QUICKFIND : SETTINGS01
+		*
+		****************************************************************************************
+	-->
+	<include src="ui_config\hudsubtitlemenu_config.xml"/>
+		
+		
+	<rect name="hudsubtitle_text_layout">
+		<alpha> 0 </alpha>
+		<depth> 2 </depth>
+		<x> 0 </x>
+		<y> 0 </y>
+		<locus> &true; </locus>
+		
+		
+		
+		<!-- SUBTITLES =============================================================================-->
+		<text name="hudsubtitle_text">
+			<id> 1 </id>
+			<string> </string>
+			<visible> &false; </visible>
+			<font> <copy src="Imp_UI_Settings" trait="_diatf"/> </font>
+			<red> <copy src="Imp_UI_Settings" trait="_diatr"/> </red>
+			<green> <copy src="Imp_UI_Settings" trait="_diatg"/> </green>
+			<blue> <copy src="Imp_UI_Settings" trait="_diatb"/> </blue>
+			<alpha> <copy src="Imp_UI_Settings" trait="_diata"/> </alpha>
+			<justify> &center; </justify>
+			<wrapwidth> 1000 </wrapwidth>
+			<x>
+				<copy src="screen()" trait="width"/>
+				<div> 2 </div>
+				<add src="Imp_UI_Settings" trait="_diatx"/>
+			</x>
+			<y>
+				<copy src="screen()" trait="height"/>
+				<sub>
+					 <copy src="screen()" trait="cropy"/>
+					 <mul>2</mul>
+				</sub>
+				<sub> 115 </sub>
+				<sub src="me()" trait="height"/>
+				<min>
+					<copy src="me()" trait="user1"/>
+					<sub src="me()" trait="height"/>
+				</min>
+				<add src="Imp_UI_Settings" trait="_diaty"/>
+			</y>
+			<user1> 0 </user1>	<!-- set by code - y value of top of topmost HUDInfoMenu item -->
+		</text>
+		
+		<text name="hudsubtitle_text_ds">
+			<depth> -1 </depth>
+			<string> <copy src="hudsubtitle_text" trait="string"/> </string>
+			<visible> <copy src="Imp_UI_Settings" trait="_diatsv"/> </visible>
+			<font> <copy src="Imp_UI_Settings" trait="_diatf"/> </font>
+			<red> <copy src="Imp_UI_Settings" trait="_diatsr"/> </red>
+			<green> <copy src="Imp_UI_Settings" trait="_diatsg"/> </green>
+			<blue> <copy src="Imp_UI_Settings" trait="_diatsb"/> </blue>
+			<alpha> <copy src="Imp_UI_Settings" trait="_diatsa"/> </alpha>
+			<justify> &center; </justify>
+			<wrapwidth> 1000 </wrapwidth>
+			<x>
+				<copy src="hudsubtitle_text" trait="x"/>
+				<add src="Imp_UI_Settings" trait="_diasox"/>
+			</x>
+			<y>
+				<copy src="hudsubtitle_text" trait="y"/>
+				<add src="Imp_UI_Settings" trait="_diasoy"/>
+			</y>
+		</text>
+		
+		
+		<!-- NOTICE =============================================================================-->
+		<image name="hudsubtitle_icon">
+			<visible> <copy src="hudsubtitle_notice" trait="user2"/> </visible>
+			<filename> <copy src="hudsubtitle_notice" trait="user1"/> </filename>
+			<width> 63 </width>
+			<height> 63 </height>
+			<x>
+				<copy src="screen()" trait="cropx"/>
+				<mul> 2 </mul>
+			</x>
+			<y>
+				<copy src="screen()" trait="cropy"/>
+				<mul> 2 </mul>
+			</y>
+		</image>
+		
+		<text name="hudsubtitle_notice">
+			<id> 2 </id>
+			<string> <copy src="strings()" trait="_dummynotice"/> </string>
+			<visible> &false; </visible>
+			<font> <copy src="Imp_UI_Settings" trait="_nottf"/> </font>
+			<red> <copy src="Imp_UI_Settings" trait="_nottr"/> </red>
+			<green> <copy src="Imp_UI_Settings" trait="_nottg"/> </green>
+			<blue> <copy src="Imp_UI_Settings" trait="_nottb"/> </blue>
+			<alpha> <copy src="Imp_UI_Settings" trait="_notta"/> </alpha>
+			<wrapwidth>
+				<copy src="screen()" trait="width"/>
+				<sub>
+					<copy src="screen()" trait="cropx"/>
+					<mul> 4 </mul>
+				</sub>
+				<sub src="hudsubtitle_icon" trait="x"/>
+				<sub src="hudsubtitle_icon" trait="width"/>
+				<sub> 8 </sub>
+			</wrapwidth>
+			<x>
+				<copy src="hudsubtitle_icon" trait="x"/>
+				<add> 
+					<copy src="hudsubtitle_icon" trait="width"/>
+					<onlyif src="me()" trait="user2"/>
+				</add>
+				<add> 8 </add>
+				<add src="Imp_UI_Settings" trait="_nottx"/>
+			</x>
+			<y>
+				<copy src="hudsubtitle_icon" trait="y"/>
+				<add src="Imp_UI_Settings" trait="_notty"/>
+			</y>
+			<user1> </user1>				<!-- icon pathname -->
+			<user2> &false; </user2>		<!-- is there an icon, true/false -->
+		</text>
+		
+		<text name="hudsubtitle_notice_ds">
+			<depth> -1 </depth>
+			<string> <copy src="hudsubtitle_notice" trait="string"/> </string>
+			<visible> <copy src="Imp_UI_Settings" trait="_nottsv"/> </visible>
+			<font> <copy src="Imp_UI_Settings" trait="_nottf"/> </font>
+			<red> <copy src="Imp_UI_Settings" trait="_nottsr"/> </red>
+			<green> <copy src="Imp_UI_Settings" trait="_nottsg"/> </green>
+			<blue> <copy src="Imp_UI_Settings" trait="_nottsb"/> </blue>
+			<alpha> <copy src="Imp_UI_Settings" trait="_nottsa"/> </alpha>
+			<wrapwidth> <copy src="hudsubtitle_notice" trait="wrapwidth"/> </wrapwidth>
+			<x>
+				<copy src="hudsubtitle_notice" trait="x"/>
+				<add src="Imp_UI_Settings" trait="_notsox"/>
+			</x>
+			<y>
+				<copy src="hudsubtitle_notice" trait="y"/>
+				<add src="Imp_UI_Settings" trait="_notsoy"/>
+			</y>
+		</text>
+		
+	</rect>
+</menu>
+
+
