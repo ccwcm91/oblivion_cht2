@@ -1,0 +1,22 @@
+# This file is used by Oblivion to keep track of your downloaded content.
+# Please do not modify this file.
+
+DLCHorseArmor.esp
+
+DLCMehrunesRazor.esp
+
+Knights.esp
+
+DLCShiveringIsles.esp
+
+DLCVileLair.esp
+
+DLCFrostcrag.esp
+
+DLCBattlehornCastle.esp
+
+DLCSpellTomes.esp
+
+DLCThievesDen.esp
+
+DLCOrrery.esp

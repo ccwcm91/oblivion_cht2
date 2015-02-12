@@ -1,0 +1,501 @@
+*
+* Lines that start with '*' are comments
+* Commands for building a credits file are as follows
+*<X:n> n = 128 (absolute position), +10 or -10 (offset positions)
+*<Y:n>
+*<I:wwww,hhhh,aaa,TextureFilename.dds> wwww = how wide should the picture be, hhhh = how tall
+*				       aaa = alpha 255 opaque
+*<J:x> x = L (left justify), R (right justify), or C (center justify)
+*<F:x> x = font number from the Oblivion ini
+*<C:rrr,ggg,bbb,aaa> rrr = red color 0 - 255, ggg = green color
+*		     bbb = blue color for the font, aaa = alpha 255 opaque
+*
+* After each line the font height will be added to the y value and the x will be reset
+* to the last <X:n> position.
+*
+* Adding an image will create a polygon that is wwww x hhhh and fit the texture to it. The
+* y value will have the hhhh added to it and the x value will be reset to the last <X:n>.
+*
+* Images are stored in the Textures\Menus\Credits directory.
+*
+* Image wwww,hhhh MUST be 4 characters. Image aaa and Color rrr,ggg,bbb,aaa MUST be 3 characters.
+*
+*
+<X:0><Y:0><J:C><F:2>
+
+
+<I:0512,0128,255,tes_oblivion_logo.dds>
+
+<C:206,158,102,255>Game Design<C:235,213,174,255>
+Bethesda Game Studios
+
+<C:206,158,102,255>Executive Producer<C:235,213,174,255>
+Todd Howard
+
+<C:206,158,102,255>Senior Producer<C:235,213,174,255>
+Ashley Cheng
+
+<C:206,158,102,255>Lead Programmers<C:235,213,174,255>
+Guy Carver
+Craig Walton
+
+<C:206,158,102,255>Lead Artist<C:235,213,174,255>
+Matthew Carofano
+
+<C:206,158,102,255>Lead Character Artist<C:235,213,174,255>
+Christiane Meister
+
+<C:206,158,102,255>Lead Dungeon Artist<C:235,213,174,255>
+Istvan Pely
+
+<C:206,158,102,255>Lead Designer<C:235,213,174,255>
+Ken Rolston
+
+<C:206,158,102,255>Quality Assurance Lead<C:235,213,174,255>
+Tim Lamb
+
+<C:206,158,102,255>Producers<C:235,213,174,255>
+Gavin Carter
+Craig Lafferty
+
+<C:206,158,102,255>Programming<C:235,213,174,255>
+Brendan Anthony
+Erik Deitrick
+Scott Franke
+Ahn Hopgood
+Christopher Hynes
+Chris Innanen
+Mat Krohn
+Mike Lipari
+Steve Meister
+Nathan Nordfelt
+Brian Robb
+Jeff Sheiman
+Dan Teitel
+
+<C:206,158,102,255>Additional Programming<C:235,213,174,255>
+Joshua Andersen
+David DiAngelo
+Joel Dinolt
+Michael Dulany
+Kurt Kuhlmann
+Davor Mrkoci
+Matt Picioccio
+Jean Simonet
+Orin Tresnjak
+Jeff Ward
+
+<C:206,158,102,255>World Art<C:235,213,174,255>
+Hope Adams
+Noah Berry
+Clara Cafasso
+Tony Greco
+Grant Struthers
+Megan Sawyer
+Rafael Vargas
+
+<C:206,158,102,255>Additional World Art<C:235,213,174,255>
+Sally Huang
+Daniel T. Lee
+Ryan Sears
+Andy Barron
+
+<C:206,158,102,255>Dungeon Art<C:235,213,174,255>
+Todd Broadwater
+Tim Lindsey
+Frank Ward
+Michael E. Ryan
+Robert Wisnewski
+
+<C:206,158,102,255>Additional Dungeon Art<C:235,213,174,255>
+Jeff Browne
+Joel Burgess
+
+<C:206,158,102,255>Character and Creature Art<C:235,213,174,255>
+Hiu Lai Chong
+Josh Jones
+Gary Noonan
+Hugh Riley
+Juan Sanchez
+
+<C:206,158,102,255>Additional Character and Creature Art<C:235,213,174,255>
+Ka Kei Wong
+Liquid Development
+
+<C:206,158,102,255>Interface Art<C:235,213,174,255>
+Natalia Smirnova
+
+<C:206,158,102,255>Quest Design<C:235,213,174,255>
+Brian Chapin
+Kurt Kuhlmann
+Alan Nanes
+Mark Nelson
+Bruce Nesmith
+Emil Pagliarulo
+
+<C:206,158,102,255>Additional Design<C:235,213,174,255>
+Erik J. Caponi
+Jon Paul Duvall
+
+<C:206,158,102,255>Additional Writing<C:235,213,174,255>
+Ted Petersen
+Michael Kirkbride
+
+<C:206,158,102,255>Additional Production<C:235,213,174,255>
+Tim Bumar
+Jeff Gardiner
+Rich Lambert
+Matt Wotring
+
+<C:206,158,102,255>Sound Design & Voice Direction<C:235,213,174,255>
+Mark Lampert
+
+<C:206,158,102,255>Video Design & Production<C:235,213,174,255>
+Steven Green
+
+<C:206,158,102,255>Quality Assurance<C:235,213,174,255>
+Kevin Kauffman
+Nathan X. McDyer
+Will Noble
+Jennifer Noland
+
+<C:206,158,102,255>Additional Quality Assurance<C:235,213,174,255>
+Ben Barreras III
+Brian Bloomfield
+Angela Browder
+Ruben Brown
+James Costantino
+Joseph DiAngelo
+Michael Dulany
+Viatcheslav Erofeev
+Toby Franklin
+Ryan Gerhardt
+Brian Jackson
+Michael Jenkins
+Greg Kline
+Christopher Krietz
+Mike Mazzuca
+Aaron Mitschelen
+Louis Riley
+Joseph Romano
+John Pisano
+Tihana Tresnjak-Smith
+Russell Vaccaro
+Robert Wallace
+Absolute Quality, Inc.
+
+<C:206,158,102,255>Original Music Composed and Produced By<C:235,213,174,255>
+Jeremy Soule
+www.jeremysoule.com
+
+<C:206,158,102,255>Character Voices<C:235,213,174,255>
+Sean Bean
+Lynda Carter
+Terence Stamp
+Patrick Stewart
+
+<C:206,158,102,255>Race Voices<C:235,213,174,255>
+Johnathon Bryce
+Ralph Cosham
+Catherine Flye
+Gayle Jessup
+Wes Johnson
+Linda Kenyon
+Elisabeth Noone
+Michael Mack
+Craig Sechler
+
+<C:206,158,102,255>Voice Recording<C:235,213,174,255>
+Absolute Pitch Studios, Bethesda, MD
+The Tape Gallery, London, UK
+
+<C:206,158,102,255>Additional Sound Effects<C:235,213,174,255>
+dSonic Audio
+
+<C:206,158,102,255>Packaging and Manual<C:235,213,174,255>
+Michael Wagner
+Lindsay Muller
+
+<C:206,158,102,255>Director of Information Technology<C:235,213,174,255>
+Steve Bloom
+
+<C:206,158,102,255>Information Technology<C:235,213,174,255>
+Rob Havlovick
+Joe Owens
+Paul Tuttle
+
+<C:206,158,102,255>Quality Assurance Managers<C:235,213,174,255>
+Mike Fridley
+Rob Gray
+
+<C:206,158,102,255>VP, Public Relations and Marketing<C:235,213,174,255>
+Pete Hines
+
+<C:206,158,102,255>Marketing Manager<C:235,213,174,255>
+Erin Losi
+
+<C:206,158,102,255>Marketing Coordinator<C:235,213,174,255>
+Paris Nourmohammadi
+
+<C:206,158,102,255>VP, Development<C:235,213,174,255>
+Todd Vaughn
+
+<C:206,158,102,255>President<C:235,213,174,255>
+Vlatko Andonov
+
+
+<C:206,158,102,255>Localization<C:235,213,174,255>
+Babel Media, UK
+
+<C:206,158,102,255>Operations Director<C:235,213,174,255>
+Alberto Schiannini
+
+<C:206,158,102,255>Producer<C:235,213,174,255>
+Emma Timms
+
+<C:206,158,102,255>Audio Manager<C:235,213,174,255>
+Adam Chapman
+
+<C:206,158,102,255>Senior QAC<C:235,213,174,255>	
+Laura Carter
+
+<C:206,158,102,255>QACs<C:235,213,174,255>
+Ben Adams
+Lex Bentley
+
+<C:206,158,102,255>Audio QAC<C:235,213,174,255>
+Arif Khan
+
+<C:206,158,102,255>QSC<C:235,213,174,255>
+Les Plumridge
+
+<C:206,158,102,255>French Test Team<C:235,213,174,255>
+Carole Aubree-Dumont
+Seb Celimon
+Marilyn Gray
+Abder Ben Bouhout
+Sebastien Cazenave
+Sophie Krauss
+Tom Nettleton
+
+<C:206,158,102,255>Italian Test Team<C:235,213,174,255>
+Pino Piccolella
+Adele Dalena
+Fabio Gurini
+Daniele Gallori
+Francesco Montanini
+Margherita Seconnino
+
+<C:206,158,102,255>German Test Team<C:235,213,174,255>
+Eva M. Walter
+Liam O'connell
+Nina Mitterbacher
+Russell Hyer
+Justyna Waszkiewicz
+Daniela Schulze
+René Lange
+
+<C:206,158,102,255>Spanish Test Team<C:235,213,174,255>
+Alberto Mallo
+Pavel Romero
+Israel Delgado
+Bruno Diez
+Nacho Garcia
+David Lopez Aragon
+Maria Guruceta
+
+<C:206,158,102,255>French Audio Test Team<C:235,213,174,255>
+Geraldine Berger
+Carole Aubree-Dumont
+Sebastien Cazenave
+Tom Nettleton
+Seb Celimon
+
+<C:206,158,102,255>German Audio Test Team<C:235,213,174,255>
+Eva M. Walter
+Tammo Klockner
+René Lange
+Liam O'connell
+
+<C:206,158,102,255>Translators<C:235,213,174,255>
+Guillaume le Pennec
+Agnès Letourneur
+Claude Esmein
+Emmanuelle Roué
+GMT
+ThinkAMDS
+Lia Desotgiu
+Birgit Neuwald Morton
+Terence French
+S&H Entertainment Localization
+Stefan Hahn + Hans Breuer
+Mark Pendry
+Iván Madrigal
+Virginia Parades Guerrea
+Natalia Brines-Moya
+Sonia Vasconcelos
+Diego Verger
+José Esteban
+Ruth Díez Peña
+Cristina Escobar
+Elena Otero
+Phuong Tran-Mai
+Lara Ferrulli
+Gabriele Khan
+Diana Díaz Montón
+
+<C:206,158,102,255>French Recording Studio<C:235,213,174,255>
+Hi Fi Genie
+ 
+<C:206,158,102,255>German Recording Studio<C:235,213,174,255>
+M&S Music 
+ 
+<C:206,158,102,255>Dialogue Post-Production Team<C:235,213,174,255>
+Hugh Edwards
+Jeremy Paul Carroll
+Mary Snee
+Matthew Carter
+Richard Joseph
+Barry Towndrow
+Spike Burridge
+Malin Arvidsson
+Arif Khan
+
+<C:206,158,102,255>Localization Special Thanks<C:235,213,174,255>
+Stefan Lupp
+Mick
+Philippe David
+Greg Gaby
+Martial Le Minoux 
+
+
+
+<C:206,158,102,255>2K<C:235,213,174,255>
+Christina Recchio
+Christoph Hartmann
+David Ismailer
+Ryan Brant
+Sarah Anderson
+Bob Blau
+David Edwards
+Scott DeFreitas
+Lesley Zinn
+Dorian Rehfield
+Greg Gobbi
+Jon Payne
+Jim Yang
+Jack Scalici
+Gabe Abarcar
+Tom Bass
+Susan Lewis
+Jason Bergman
+
+
+
+<I:0512,0128,255,zenimax_media_logo.dds>
+
+<C:206,158,102,255>CEO<C:235,213,174,255>
+Robert Altman
+
+<C:206,158,102,255>President<C:235,213,174,255>
+Ernie Del
+
+<C:206,158,102,255>COO<C:235,213,174,255>
+Jamie Leder
+
+<C:206,158,102,255>CFO<C:235,213,174,255>
+Cindy Tallent
+
+<C:206,158,102,255>EVP-Legal<C:235,213,174,255>
+Grif Lesher
+
+<C:206,158,102,255>Administration<C:235,213,174,255>
+Jill Bralove
+Bernice Guice
+Denise Kidd
+Barbara Manning
+Patti Pulupa
+Valery St. Preux
+
+<C:206,158,102,255>Human Resources<C:235,213,174,255>
+Tammy Boyd-Shumway
+Jazzlyn Flores
+
+<C:206,158,102,255>Receptionist<C:235,213,174,255>
+Paula Kasey
+
+<C:206,158,102,255>Executive Chef<C:235,213,174,255>
+Kenny McDonald
+
+<C:206,158,102,255>Special Thanks<C:235,213,174,255>
+Steve Adamo
+Scott Alexander
+Dan Amerson
+Colin Barrett
+Scott Berfield
+Cem Cebenoyan
+Lev Chapelsky
+Bruce Dawson
+Marco de Gries
+Edelman Public Relations 
+Fredrik Eriksson 
+Blake Fischer
+Brad Goldberg
+Mark Griffin
+Andrew Griffiths 
+Dawn Hershey
+Greg James
+Andrew Jenkins
+Matt Lee
+Mary A. Luzanski 
+Doug Kubel
+Mike Mace
+Stewart Mallee 
+Jason Mitchell
+Rebecca Mueller 
+Nicky Pearson 
+Tim Preston
+Manuel N. Regien 
+Naomi Ridout 
+Jeff Royle
+Vincent Scheib
+John Smith
+Jeffrey J. Struckel 
+The Ant Farm
+Kelly Tofte
+Ross Odwyer
+Mike Walsh
+Mikey Wetzel
+Darren R Wright 
+
+All our families and friends
+All the fans on Elderscrolls.com
+
+<I:0512,0064,255,obliv_credscreen_logos-black.dds>
+
+Uses Gamebryo software 
+Copyright 1999-2005 Emergent Game Technologies
+
+Havok.com™ Copyright 1999-2002 
+Telekinesys Research Limited.
+All rights reserved.  See www.havok.com 
+for details.
+
+Portions of this software 
+utilize SpeedTree technology. 
+© 2002-2005 Interactive Data Visualization, Inc. 
+All Rights Reserved.
+
+FaceGen from Singular Inversions, Inc. 
+© 1998-2005. All rights reserved.
+
+Uses OC3 Entertainment software
+© 1998-2005 OC3 Entertainment, Inc. 
+and its licensors. All rights reserved.
+
+Uses Bink Video. Copyright 1997-2001 
+by RAD Game Tools, Inc.
+
+<C:206,158,102,255>The Elder Scrolls IV: Oblivion
+Copyright 2006 Bethesda Softworks
+www.elderscrolls.com
